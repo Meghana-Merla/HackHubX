@@ -58,7 +58,17 @@ android {
 dependencies {
 
     implementation(
-        "com.google.firebase:firebase-auth-ktx:23.1.0"
+        platform(
+            "com.google.firebase:firebase-bom:33.1.2"
+        )
+    )
+
+    implementation(
+        "com.google.firebase:firebase-auth-ktx"
+    )
+
+    implementation(
+        "com.google.firebase:firebase-firestore-ktx"
     )
 
     implementation(libs.androidx.core.ktx)

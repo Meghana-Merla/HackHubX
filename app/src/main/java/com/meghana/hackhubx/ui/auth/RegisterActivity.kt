@@ -4,7 +4,9 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 import com.meghana.hackhubx.databinding.ActivityRegisterBinding
+import com.meghana.hackhubx.model.User
 
 class RegisterActivity : AppCompatActivity() {
 
@@ -12,6 +14,9 @@ class RegisterActivity : AppCompatActivity() {
             ActivityRegisterBinding
 
     private lateinit var auth: FirebaseAuth
+
+    private lateinit var firestore:
+            FirebaseFirestore
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,6 +27,9 @@ class RegisterActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         auth = FirebaseAuth.getInstance()
+
+        firestore =
+            FirebaseFirestore.getInstance()
 
         binding.btnRegister.setOnClickListener {
 
@@ -86,6 +94,8 @@ class RegisterActivity : AppCompatActivity() {
                 else -> {
 
                     registerUser(
+                        name,
+                        college,
                         email,
                         password
                     )
@@ -95,6 +105,8 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     private fun registerUser(
+        name: String,
+        college: String,
         email: String,
         password: String
     ) {
@@ -106,11 +118,39 @@ class RegisterActivity : AppCompatActivity() {
 
             if (it.isSuccessful) {
 
-                showToast(
-                    "Registration Successful"
+                val uid =
+                    auth.currentUser?.uid ?: ""
+
+                val user = User(
+
+                    uid = uid,
+
+                    name = name,
+
+                    college = college,
+
+                    email = email
                 )
 
-                finish()
+                firestore.collection("users")
+                    .document(uid)
+                    .set(user)
+
+                    .addOnSuccessListener {
+
+                        showToast(
+                            "Registration Successful"
+                        )
+
+                        finish()
+                    }
+
+                    .addOnFailureListener {
+
+                        showToast(
+                            it.message.toString()
+                        )
+                    }
 
             } else {
 
