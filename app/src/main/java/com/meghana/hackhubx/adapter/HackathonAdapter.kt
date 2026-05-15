@@ -1,10 +1,13 @@
 package com.meghana.hackhubx.adapter
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.meghana.hackhubx.databinding.ItemHackathonBinding
 import com.meghana.hackhubx.model.Hackathon
+import com.meghana.hackhubx.ui.dashboard.HackathonDetailsActivity
 
 class HackathonAdapter(
 
@@ -12,23 +15,10 @@ class HackathonAdapter(
     List<Hackathon>,
 
     private val appliedHackathons:
-    Set<String>,
+    Set<String>
 
-    private val onApplyClick:
-    ((Hackathon) -> Unit)?,
-
-    private val onDeleteClick:
-    ((Hackathon) -> Unit)?,
-
-    private val onEditClick:
-    ((Hackathon) -> Unit)?,
-
-    private val onViewApplicantsClick:
-    ((Hackathon) -> Unit)?
-):
-
-    RecyclerView.Adapter<
-            HackathonAdapter.HackathonViewHolder>() {
+) : RecyclerView.Adapter<
+        HackathonAdapter.HackathonViewHolder>() {
 
     inner class HackathonViewHolder(
         val binding: ItemHackathonBinding
@@ -44,14 +34,18 @@ class HackathonAdapter(
         val binding =
             ItemHackathonBinding.inflate(
 
-                LayoutInflater.from(parent.context),
+                LayoutInflater.from(
+                    parent.context
+                ),
 
                 parent,
 
                 false
             )
 
-        return HackathonViewHolder(binding)
+        return HackathonViewHolder(
+            binding
+        )
     }
 
     override fun onBindViewHolder(
@@ -74,105 +68,65 @@ class HackathonAdapter(
         holder.binding.tvDeadline.text =
             "Deadline: ${hackathon.deadline}"
 
-        if (onApplyClick != null) {
+        Glide.with(holder.itemView.context)
 
-            holder.binding.btnApply.visibility =
-                android.view.View.VISIBLE
+            .load(hackathon.imageUrl)
 
-            if (
-                appliedHackathons.contains(
-                    hackathon.title
+            .into(holder.binding.imgHackathon)
+
+        holder.itemView.setOnClickListener {
+
+            val intent =
+
+                Intent(
+
+                    holder.itemView.context,
+
+                    HackathonDetailsActivity::class.java
                 )
-            ) {
 
-                holder.binding.btnApply.text =
-                    "Applied"
+            intent.putExtra(
+                "title",
+                hackathon.title
+            )
 
-                holder.binding.btnApply
-                    .isEnabled = false
+            intent.putExtra(
+                "prize",
+                hackathon.prize
+            )
 
-            } else {
+            intent.putExtra(
+                "teamSize",
+                hackathon.teamSize
+            )
 
-                holder.binding.btnApply.text =
-                    "Apply Now"
+            intent.putExtra(
+                "deadline",
+                hackathon.deadline
+            )
 
-                holder.binding.btnApply
-                    .isEnabled = true
+            intent.putExtra(
+                "description",
+                hackathon.description
+            )
 
-                holder.binding.btnApply
-                    .setOnClickListener {
+            intent.putExtra(
+                "imageUrl",
+                hackathon.imageUrl
+            )
 
-                        onApplyClick.invoke(
-                            hackathon
-                        )
-                    }
-            }
+            intent.putExtra(
+                "organizerId",
+                hackathon.organizerId
+            )
 
-        } else {
+            intent.putExtra(
+                "documentId",
+                hackathon.documentId
+            )
 
-            holder.binding.btnApply.visibility =
-                android.view.View.GONE
-        }
-
-        if (onEditClick != null) {
-
-            holder.binding.btnEdit.visibility =
-                android.view.View.VISIBLE
-
-            holder.binding.btnEdit
-                .setOnClickListener {
-
-                    onEditClick.invoke(
-                        hackathon
-                    )
-                }
-
-        } else {
-
-            holder.binding.btnEdit.visibility =
-                android.view.View.GONE
-        }
-
-        if (onViewApplicantsClick != null) {
-
-            holder.binding.btnViewApplicants.visibility =
-                android.view.View.VISIBLE
-
-            holder.binding.btnViewApplicants.text =
-
-                "View Applicants (${hackathon.applicantCount})"
-
-            holder.binding.btnViewApplicants
-                .setOnClickListener {
-
-                    onViewApplicantsClick.invoke(
-                        hackathon
-                    )
-                }
-
-        } else {
-
-            holder.binding.btnViewApplicants.visibility =
-                android.view.View.GONE
-        }
-
-        if (onDeleteClick != null) {
-
-            holder.binding.btnDelete.visibility =
-                android.view.View.VISIBLE
-
-            holder.binding.btnDelete
-                .setOnClickListener {
-
-                    onDeleteClick.invoke(
-                        hackathon
-                    )
-                }
-
-        } else {
-
-            holder.binding.btnDelete.visibility =
-                android.view.View.GONE
+            holder.itemView.context
+                .startActivity(intent)
         }
     }
 

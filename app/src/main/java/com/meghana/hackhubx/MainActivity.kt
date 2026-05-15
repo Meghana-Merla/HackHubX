@@ -2,26 +2,26 @@ package com.meghana.hackhubx
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.meghana.hackhubx.adapter.HackathonAdapter
 import com.meghana.hackhubx.databinding.ActivityMainBinding
-import com.meghana.hackhubx.model.Application
 import com.meghana.hackhubx.model.Hackathon
 import com.meghana.hackhubx.model.User
 import com.meghana.hackhubx.ui.dashboard.ApplicationsActivity
 import com.meghana.hackhubx.ui.dashboard.ProfileActivity
-import android.text.TextWatcher
-import android.text.Editable
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding:
             ActivityMainBinding
 
-    private lateinit var auth: FirebaseAuth
+    private lateinit var auth:
+            FirebaseAuth
 
     private lateinit var firestore:
             FirebaseFirestore
@@ -36,18 +36,21 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         binding =
-            ActivityMainBinding.inflate(layoutInflater)
+            ActivityMainBinding.inflate(
+                layoutInflater
+            )
 
         setContentView(binding.root)
 
-        auth = FirebaseAuth.getInstance()
+        auth =
+            FirebaseAuth.getInstance()
 
         firestore =
             FirebaseFirestore.getInstance()
 
         loadUserData()
 
-        loadAppliedHackathons()
+        setupHackathons()
 
         binding.btnMyApplications
             .setOnClickListener {
@@ -76,8 +79,7 @@ class MainActivity : AppCompatActivity() {
         binding.etSearchHackathons
             .addTextChangedListener(
 
-                object :
-                    android.text.TextWatcher {
+                object : TextWatcher {
 
                     override fun beforeTextChanged(
                         s: CharSequence?,
@@ -100,7 +102,7 @@ class MainActivity : AppCompatActivity() {
                     }
 
                     override fun afterTextChanged(
-                        s: android.text.Editable?
+                        s: Editable?
                     ) {
                     }
                 }
@@ -113,56 +115,23 @@ class MainActivity : AppCompatActivity() {
             auth.currentUser?.uid ?: return
 
         firestore.collection("users")
+
             .document(uid)
+
             .get()
 
             .addOnSuccessListener {
 
                 val user =
-                    it.toObject(User::class.java)
+                    it.toObject(
+                        User::class.java
+                    )
 
                 binding.tvName.text =
                     "Welcome ${user?.name} 👋"
 
                 binding.tvCollege.text =
                     user?.college
-            }
-    }
-
-    private fun loadAppliedHackathons() {
-
-        val uid =
-            auth.currentUser?.uid ?: return
-
-        firestore.collection("applications")
-
-            .whereEqualTo(
-                "userId",
-                uid
-            )
-
-            .get()
-
-            .addOnSuccessListener { result ->
-
-                appliedHackathons.clear()
-
-                for (document in result) {
-
-                    val title =
-                        document.getString(
-                            "hackathonTitle"
-                        )
-
-                    if (title != null) {
-
-                        appliedHackathons.add(
-                            title
-                        )
-                    }
-                }
-
-                setupHackathons()
             }
     }
 
@@ -177,27 +146,16 @@ class MainActivity : AppCompatActivity() {
 
                 hackathonList,
 
-                appliedHackathons,
-
-                { hackathon ->
-
-                    applyToHackathon(
-                        hackathon
-                    )
-                },
-
-                null,
-
-                null,
-
-                null
+                appliedHackathons
             )
 
-        binding.recyclerHackathons.layoutManager =
+        binding.recyclerHackathons
+            .layoutManager =
+
             LinearLayoutManager(this)
 
-        binding.recyclerHackathons.adapter =
-            adapter
+        binding.recyclerHackathons
+            .adapter = adapter
 
         firestore.collection("hackathons")
 
@@ -238,6 +196,7 @@ class MainActivity : AppCompatActivity() {
                 adapter.notifyDataSetChanged()
             }
     }
+
     private fun filterHackathons(
         query: String
     ) {
@@ -258,97 +217,10 @@ class MainActivity : AppCompatActivity() {
 
                 filteredList,
 
-                appliedHackathons,
-
-                { hackathon ->
-
-                    applyToHackathon(
-                        hackathon
-                    )
-                },
-
-                null,
-
-                null,
-
-                null
+                appliedHackathons
             )
 
-        binding.recyclerHackathons.adapter =
-            adapter
-    }
-
-    private fun applyToHackathon(
-        hackathon: Hackathon
-    ) {
-
-        val uid =
-            auth.currentUser?.uid ?: return
-
-        firestore.collection("applications")
-
-            .whereEqualTo(
-                "userId",
-                uid
-            )
-
-            .whereEqualTo(
-                "hackathonTitle",
-                hackathon.title
-            )
-
-            .get()
-
-            .addOnSuccessListener { result ->
-
-                if (!result.isEmpty) {
-
-                    android.widget.Toast.makeText(
-                        this,
-                        "Already Applied",
-                        android.widget.Toast.LENGTH_SHORT
-                    ).show()
-
-                } else {
-
-                    val application = Application(
-
-                        userId = uid,
-
-                        hackathonTitle =
-                            hackathon.title,
-
-                        timestamp =
-                            System.currentTimeMillis()
-                    )
-
-                    firestore.collection("applications")
-                        .add(application)
-
-                        .addOnSuccessListener {
-
-                            appliedHackathons.add(
-                                hackathon.title
-                            )
-
-                            setupHackathons()
-
-                            android.widget.Toast.makeText(
-                                this,
-                                "Applied Successfully",
-                                android.widget.Toast.LENGTH_SHORT
-                            ).show()
-                        }
-
-                        .addOnFailureListener {
-
-                            android.widget.Toast.makeText(
-                                this,
-                                it.message,
-                                android.widget.Toast.LENGTH_SHORT
-                            ).show()
-                        }
-                }
-            }
+        binding.recyclerHackathons
+            .adapter = adapter
     }
 }

@@ -14,5 +14,9 @@ data class Hackathon(
 
     val documentId: String = "",
 
-    val applicantCount: Int = 0
+    val applicantCount: Int = 0,
+
+    val description: String = "",
+
+    val imageUrl: String = ""
 )

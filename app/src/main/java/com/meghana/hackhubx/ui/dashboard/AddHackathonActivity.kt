@@ -112,11 +112,24 @@ class AddHackathonActivity
                 )
             )
 
+            binding.etDescription.setText(
+
+                intent.getStringExtra(
+                    "description"
+                )
+            )
+
+            binding.etImageUrl.setText(
+
+                intent.getStringExtra(
+                    "imageUrl"
+                )
+            )
+
             binding.btnCreateHackathon.text =
                 "Update Hackathon"
         }
     }
-
     private fun createHackathon() {
 
         val title =
@@ -146,6 +159,16 @@ class AddHackathonActivity
 
         val deadline =
             binding.etDeadline.text
+                .toString()
+                .trim()
+
+        val description =
+            binding.etDescription.text
+                .toString()
+                .trim()
+
+        val imageUrl =
+            binding.etImageUrl.text
                 .toString()
                 .trim()
 
@@ -194,6 +217,20 @@ class AddHackathonActivity
                 )
             }
 
+            description.isEmpty() -> {
+
+                showToast(
+                    "Enter description"
+                )
+            }
+
+            imageUrl.isEmpty() -> {
+
+                showToast(
+                    "Enter image URL"
+                )
+            }
+
             else -> {
 
                 startLoading()
@@ -219,7 +256,11 @@ class AddHackathonActivity
 
                     organizerId = organizerId,
 
-                    documentId = documentId
+                    documentId = documentId,
+
+                    description = description,
+
+                    imageUrl = imageUrl
                 )
 
                 if (isEditMode) {

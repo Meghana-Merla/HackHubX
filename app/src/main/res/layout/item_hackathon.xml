@@ -26,6 +26,19 @@
 
         android:padding="20dp">
 
+        <ImageView
+            android:id="@+id/imgHackathon"
+
+            android:layout_width="match_parent"
+
+            android:layout_height="180dp"
+
+            android:scaleType="centerCrop"
+
+            android:src="@mipmap/ic_launcher"
+
+            android:layout_marginBottom="14dp" />
+
         <TextView
             android:id="@+id/tvHackathonTitle"
 
@@ -85,80 +98,6 @@
             android:textColor="@color/text_dark"
 
             android:layout_marginTop="6dp" />
-
-        <Button
-            android:id="@+id/btnApply"
-
-            android:layout_width="match_parent"
-
-            android:layout_height="52dp"
-
-            android:text="Apply Now"
-
-            android:textColor="@color/white"
-
-            android:textStyle="bold"
-
-            android:backgroundTint="@color/grape_primary"
-
-            android:layout_marginTop="18dp" />
-
-        <Button
-            android:id="@+id/btnViewApplicants"
-
-            android:layout_width="match_parent"
-
-            android:layout_height="52dp"
-
-            android:text="View Applicants"
-
-            android:textColor="@color/white"
-
-            android:textStyle="bold"
-
-            android:backgroundTint="@color/grape_primary"
-
-            android:layout_marginTop="12dp"
-
-            android:visibility="gone" />
-
-        <Button
-            android:id="@+id/btnEdit"
-
-            android:layout_width="match_parent"
-
-            android:layout_height="52dp"
-
-            android:text="Edit"
-
-            android:textColor="@color/white"
-
-            android:textStyle="bold"
-
-            android:backgroundTint="@color/grape_primary"
-
-            android:layout_marginTop="12dp"
-
-            android:visibility="gone" />
-
-        <Button
-            android:id="@+id/btnDelete"
-
-            android:layout_width="match_parent"
-
-            android:layout_height="52dp"
-
-            android:text="Delete"
-
-            android:textColor="@color/white"
-
-            android:textStyle="bold"
-
-            android:backgroundTint="#E53935"
-
-            android:layout_marginTop="12dp"
-
-            android:visibility="gone" />
 
     </LinearLayout>
 
