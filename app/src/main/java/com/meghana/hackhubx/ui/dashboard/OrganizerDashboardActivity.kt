@@ -9,6 +9,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.meghana.hackhubx.adapter.HackathonAdapter
 import com.meghana.hackhubx.databinding.ActivityOrganizerDashboardBinding
 import com.meghana.hackhubx.model.Hackathon
+import androidx.appcompat.app.AlertDialog
 
 class OrganizerDashboardActivity
     : AppCompatActivity() {
@@ -83,9 +84,31 @@ class OrganizerDashboardActivity
 
                 { hackathon ->
 
-                    deleteHackathon(
-                        hackathon
-                    )
+                    AlertDialog.Builder(this)
+
+                        .setTitle(
+                            "Delete Hackathon"
+                        )
+
+                        .setMessage(
+                            "Are you sure you want to delete this hackathon?"
+                        )
+
+                        .setPositiveButton(
+                            "Delete"
+                        ) { _, _ ->
+
+                            deleteHackathon(
+                                hackathon
+                            )
+                        }
+
+                        .setNegativeButton(
+                            "Cancel",
+                            null
+                        )
+
+                        .show()
                 },
 
                 { hackathon ->
