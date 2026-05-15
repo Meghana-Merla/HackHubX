@@ -3,9 +3,12 @@ package com.meghana.hackhubx
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.meghana.hackhubx.adapter.HackathonAdapter
 import com.meghana.hackhubx.databinding.ActivityMainBinding
+import com.meghana.hackhubx.model.Hackathon
 import com.meghana.hackhubx.model.User
 import com.meghana.hackhubx.ui.auth.LoginActivity
 
@@ -33,6 +36,8 @@ class MainActivity : AppCompatActivity() {
             FirebaseFirestore.getInstance()
 
         loadUserData()
+
+        setupHackathons()
 
         binding.btnLogout.setOnClickListener {
 
@@ -69,5 +74,41 @@ class MainActivity : AppCompatActivity() {
                 binding.tvCollege.text =
                     user?.college
             }
+    }
+
+    private fun setupHackathons() {
+
+        val hackathonList = listOf(
+
+            Hackathon(
+                "AI Hackathon 2026",
+                "₹50,000",
+                "2-4",
+                "May 25"
+            ),
+
+            Hackathon(
+                "Web3 Buildathon",
+                "₹1,00,000",
+                "1-3",
+                "June 2"
+            ),
+
+            Hackathon(
+                "Open Source Sprint",
+                "₹25,000",
+                "2-5",
+                "May 30"
+            )
+        )
+
+        val adapter =
+            HackathonAdapter(hackathonList)
+
+        binding.recyclerHackathons.layoutManager =
+            LinearLayoutManager(this)
+
+        binding.recyclerHackathons.adapter =
+            adapter
     }
 }

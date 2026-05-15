@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+    android:layout_width="match_parent"
+
+    android:layout_height="wrap_content"
+
+    android:layout_margin="12dp"
+
+    app:cardCornerRadius="20dp"
+
+    app:cardElevation="8dp"
+
+    app:cardBackgroundColor="@color/white">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+
+        android:layout_height="wrap_content"
+
+        android:orientation="vertical"
+
+        android:padding="20dp">
+
+        <TextView
+            android:id="@+id/tvHackathonTitle"
+
+            android:layout_width="wrap_content"
+
+            android:layout_height="wrap_content"
+
+            android:text="AI Hackathon 2026"
+
+            android:textSize="22sp"
+
+            android:textStyle="bold"
+
+            android:textColor="@color/text_dark" />
+
+        <TextView
+            android:id="@+id/tvPrize"
+
+            android:layout_width="wrap_content"
+
+            android:layout_height="wrap_content"
+
+            android:text="Prize: ₹50,000"
+
+            android:textSize="16sp"
+
+            android:textColor="@color/grape_primary"
+
+            android:layout_marginTop="12dp" />
+
+        <TextView
+            android:id="@+id/tvTeamSize"
+
+            android:layout_width="wrap_content"
+
+            android:layout_height="wrap_content"
+
+            android:text="Team Size: 2-4"
+
+            android:textSize="15sp"
+
+            android:textColor="@color/text_dark"
+
+            android:layout_marginTop="6dp" />
+
+        <TextView
+            android:id="@+id/tvDeadline"
+
+            android:layout_width="wrap_content"
+
+            android:layout_height="wrap_content"
+
+            android:text="Deadline: May 25"
+
+            android:textSize="15sp"
+
+            android:textColor="@color/text_dark"
+
+            android:layout_marginTop="6dp" />
+
+        <Button
+            android:id="@+id/btnApply"
+
+            android:layout_width="match_parent"
+
+            android:layout_height="52dp"
+
+            android:text="Apply Now"
+
+            android:textColor="@color/white"
+
+            android:textStyle="bold"
+
+            android:backgroundTint="@color/grape_primary"
+
+            android:layout_marginTop="18dp" />
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>
