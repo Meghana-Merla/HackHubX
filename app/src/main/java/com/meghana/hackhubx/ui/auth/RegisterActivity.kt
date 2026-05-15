@@ -196,8 +196,43 @@ class RegisterActivity : AppCompatActivity() {
 
                         stopLoading()
 
+                        val errorMessage = when {
+
+                            it.message
+                                ?.contains(
+                                    "email address is already",
+                                    true
+                                ) == true -> {
+
+                                "Email already registered"
+                            }
+
+                            it.message
+                                ?.contains(
+                                    "password",
+                                    true
+                                ) == true -> {
+
+                                "Weak password"
+                            }
+
+                            it.message
+                                ?.contains(
+                                    "network",
+                                    true
+                                ) == true -> {
+
+                                "No internet connection"
+                            }
+
+                            else -> {
+
+                                "Registration failed"
+                            }
+                        }
+
                         showToast(
-                            it.message.toString()
+                            errorMessage
                         )
                     }
 
@@ -205,8 +240,43 @@ class RegisterActivity : AppCompatActivity() {
 
                 stopLoading()
 
+                val errorMessage = when {
+
+                    it.exception?.message
+                        ?.contains(
+                            "email address is already",
+                            true
+                        ) == true -> {
+
+                        "Email already registered"
+                    }
+
+                    it.exception?.message
+                        ?.contains(
+                            "password",
+                            true
+                        ) == true -> {
+
+                        "Weak password"
+                    }
+
+                    it.exception?.message
+                        ?.contains(
+                            "network",
+                            true
+                        ) == true -> {
+
+                        "No internet connection"
+                    }
+
+                    else -> {
+
+                        "Registration failed"
+                    }
+                }
+
                 showToast(
-                    it.exception?.message.toString()
+                    errorMessage
                 )
             }
         }

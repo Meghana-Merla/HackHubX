@@ -146,9 +146,47 @@ class LoginActivity : AppCompatActivity() {
 
                 stopLoading()
 
+                val errorMessage = when {
+
+                    it.exception?.message
+                        ?.contains(
+                            "invalid",
+                            true
+                        ) == true ||
+
+                            it.exception?.message
+                                ?.contains(
+                                    "credential",
+                                    true
+                                ) == true ||
+
+                            it.exception?.message
+                                ?.contains(
+                                    "auth",
+                                    true
+                                ) == true -> {
+
+                        "Invalid email or password"
+                    }
+
+                    it.exception?.message
+                        ?.contains(
+                            "network",
+                            true
+                        ) == true -> {
+
+                        "No internet connection"
+                    }
+
+                    else -> {
+
+                        "Login failed"
+                    }
+                }
+
                 Toast.makeText(
                     this,
-                    it.exception?.message,
+                    errorMessage,
                     Toast.LENGTH_LONG
                 ).show()
             }
