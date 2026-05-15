@@ -1,0 +1,79 @@
+package com.meghana.hackhubx.ui.dashboard
+
+import android.content.Intent
+import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
+import com.meghana.hackhubx.databinding.ActivityProfileBinding
+import com.meghana.hackhubx.model.User
+import com.meghana.hackhubx.ui.auth.LoginActivity
+
+class ProfileActivity : AppCompatActivity() {
+
+    private lateinit var binding:
+            ActivityProfileBinding
+
+    private lateinit var auth: FirebaseAuth
+
+    private lateinit var firestore:
+            FirebaseFirestore
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        binding =
+            ActivityProfileBinding.inflate(
+                layoutInflater
+            )
+
+        setContentView(binding.root)
+
+        auth = FirebaseAuth.getInstance()
+
+        firestore =
+            FirebaseFirestore.getInstance()
+
+        loadUserData()
+
+        binding.btnLogout.setOnClickListener {
+
+            auth.signOut()
+
+            startActivity(
+
+                Intent(
+                    this,
+                    LoginActivity::class.java
+                )
+            )
+
+            finishAffinity()
+        }
+    }
+
+    private fun loadUserData() {
+
+        val uid =
+            auth.currentUser?.uid ?: return
+
+        firestore.collection("users")
+            .document(uid)
+            .get()
+
+            .addOnSuccessListener {
+
+                val user =
+                    it.toObject(User::class.java)
+
+                binding.tvName.text =
+                    user?.name
+
+                binding.tvCollege.text =
+                    user?.college
+
+                binding.tvEmail.text =
+                    user?.email
+            }
+    }
+}

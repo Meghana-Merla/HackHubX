@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+    android:layout_width="match_parent"
+
+    android:layout_height="wrap_content"
+
+    android:layout_margin="12dp"
+
+    app:cardCornerRadius="20dp"
+
+    app:cardElevation="8dp"
+
+    app:cardBackgroundColor="@color/white">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+
+        android:layout_height="wrap_content"
+
+        android:orientation="vertical"
+
+        android:padding="20dp">
+
+        <TextView
+            android:id="@+id/tvApplicationTitle"
+
+            android:layout_width="wrap_content"
+
+            android:layout_height="wrap_content"
+
+            android:text="AI Hackathon 2026"
+
+            android:textSize="24sp"
+
+            android:textStyle="bold"
+
+            android:textColor="@color/text_dark" />
+
+        <TextView
+            android:id="@+id/tvStatus"
+
+            android:layout_width="wrap_content"
+
+            android:layout_height="wrap_content"
+
+            android:text="Applied Successfully ✅"
+
+            android:textSize="16sp"
+
+            android:textStyle="bold"
+
+            android:textColor="@color/grape_primary"
+
+            android:layout_marginTop="14dp" />
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

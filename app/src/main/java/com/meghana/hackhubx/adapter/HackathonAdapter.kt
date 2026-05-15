@@ -12,7 +12,7 @@ class HackathonAdapter(
     List<Hackathon>,
 
     private val onApplyClick:
-        (Hackathon) -> Unit
+    ((Hackathon) -> Unit)?
 ):
 
     RecyclerView.Adapter<
@@ -62,9 +62,21 @@ class HackathonAdapter(
         holder.binding.tvDeadline.text =
             "Deadline: ${hackathon.deadline}"
 
-        holder.binding.btnApply.setOnClickListener {
+        if (onApplyClick != null) {
 
-            onApplyClick(hackathon)
+            holder.binding.btnApply.visibility =
+                android.view.View.VISIBLE
+
+            holder.binding.btnApply
+                .setOnClickListener {
+
+                    onApplyClick.invoke(hackathon)
+                }
+
+        } else {
+
+            holder.binding.btnApply.visibility =
+                android.view.View.GONE
         }
     }
 

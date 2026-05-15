@@ -8,10 +8,11 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.meghana.hackhubx.adapter.HackathonAdapter
 import com.meghana.hackhubx.databinding.ActivityMainBinding
+import com.meghana.hackhubx.model.Application
 import com.meghana.hackhubx.model.Hackathon
 import com.meghana.hackhubx.model.User
 import com.meghana.hackhubx.ui.auth.LoginActivity
-import com.meghana.hackhubx.model.Application
+import com.meghana.hackhubx.ui.dashboard.ApplicationsActivity
 
 class MainActivity : AppCompatActivity() {
 
@@ -40,18 +41,28 @@ class MainActivity : AppCompatActivity() {
 
         setupHackathons()
 
-        binding.btnLogout.setOnClickListener {
+        binding.btnMyApplications.setOnClickListener {
 
-            auth.signOut()
+                startActivity(
+
+                    Intent(
+                        this,
+                        ApplicationsActivity::class.java
+                    )
+                )
+            }
+
+        binding.btnProfile.setOnClickListener {
 
             startActivity(
+
                 Intent(
                     this,
-                    LoginActivity::class.java
+                    com.meghana.hackhubx
+                        .ui.dashboard
+                        .ProfileActivity::class.java
                 )
             )
-
-            finish()
         }
     }
 
@@ -110,12 +121,14 @@ class MainActivity : AppCompatActivity() {
 
                 applyToHackathon(hackathon)
             }
+
         binding.recyclerHackathons.layoutManager =
             LinearLayoutManager(this)
 
         binding.recyclerHackathons.adapter =
             adapter
     }
+
     private fun applyToHackathon(
         hackathon: Hackathon
     ) {
