@@ -11,15 +11,19 @@ import com.meghana.hackhubx.ui.auth.RegisterActivity
 
 class LoginActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityLoginBinding
+    private lateinit var binding:
+            ActivityLoginBinding
 
-    private lateinit var auth: FirebaseAuth
+    private lateinit var auth:
+            FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding =
-            ActivityLoginBinding.inflate(layoutInflater)
+            ActivityLoginBinding.inflate(
+                layoutInflater
+            )
 
         setContentView(binding.root)
 
@@ -28,12 +32,19 @@ class LoginActivity : AppCompatActivity() {
         binding.btnLogin.setOnClickListener {
 
             val email =
-                binding.etEmail.text.toString().trim()
+                binding.etEmail.text
+                    .toString()
+                    .trim()
 
             val password =
-                binding.etPassword.text.toString().trim()
+                binding.etPassword.text
+                    .toString()
+                    .trim()
 
-            if (email.isEmpty() || password.isEmpty()) {
+            if (
+                email.isEmpty() ||
+                password.isEmpty()
+            ) {
 
                 Toast.makeText(
                     this,
@@ -43,12 +54,17 @@ class LoginActivity : AppCompatActivity() {
 
             } else {
 
-                loginUser(email, password)
+                loginUser(
+                    email,
+                    password
+                )
             }
         }
+
         binding.tvRegister.setOnClickListener {
 
             startActivity(
+
                 Intent(
                     this,
                     RegisterActivity::class.java
@@ -62,6 +78,8 @@ class LoginActivity : AppCompatActivity() {
         password: String
     ) {
 
+        startLoading()
+
         auth.signInWithEmailAndPassword(
             email,
             password
@@ -70,9 +88,11 @@ class LoginActivity : AppCompatActivity() {
             if (it.isSuccessful) {
 
                 val uid =
-                    auth.currentUser?.uid ?: return@addOnCompleteListener
+                    auth.currentUser?.uid
+                        ?: return@addOnCompleteListener
 
-                com.google.firebase.firestore.FirebaseFirestore
+                com.google.firebase.firestore
+                    .FirebaseFirestore
                     .getInstance()
 
                     .collection("users")
@@ -83,8 +103,12 @@ class LoginActivity : AppCompatActivity() {
 
                     .addOnSuccessListener { document ->
 
+                        stopLoading()
+
                         val role =
-                            document.getString("role")
+                            document.getString(
+                                "role"
+                            )
 
                         Toast.makeText(
                             this,
@@ -120,6 +144,8 @@ class LoginActivity : AppCompatActivity() {
 
             } else {
 
+                stopLoading()
+
                 Toast.makeText(
                     this,
                     it.exception?.message,
@@ -127,5 +153,23 @@ class LoginActivity : AppCompatActivity() {
                 ).show()
             }
         }
+    }
+
+    private fun startLoading() {
+
+        binding.btnLogin.isEnabled =
+            false
+
+        binding.btnLogin.text =
+            "Logging in..."
+    }
+
+    private fun stopLoading() {
+
+        binding.btnLogin.isEnabled =
+            true
+
+        binding.btnLogin.text =
+            "Login"
     }
 }
