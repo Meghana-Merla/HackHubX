@@ -200,9 +200,16 @@ class MainActivity : AppCompatActivity() {
             adapter
 
         firestore.collection("hackathons")
-            .get()
 
-            .addOnSuccessListener { result ->
+            .addSnapshotListener { result, error ->
+
+                if (
+                    error != null ||
+                    result == null
+                ) {
+
+                    return@addSnapshotListener
+                }
 
                 hackathonList.clear()
 
@@ -219,15 +226,18 @@ class MainActivity : AppCompatActivity() {
                                 document.id
                         )
 
-                    hackathonList.add(hackathon)
+                    hackathonList.add(
+                        hackathon
+                    )
 
-                    allHackathons.add(hackathon)
+                    allHackathons.add(
+                        hackathon
+                    )
                 }
 
                 adapter.notifyDataSetChanged()
             }
     }
-
     private fun filterHackathons(
         query: String
     ) {

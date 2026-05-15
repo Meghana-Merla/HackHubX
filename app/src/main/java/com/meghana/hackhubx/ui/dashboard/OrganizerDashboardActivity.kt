@@ -219,9 +219,15 @@ class OrganizerDashboardActivity
                 organizerId
             )
 
-            .get()
+            .addSnapshotListener { result, error ->
 
-            .addOnSuccessListener { result ->
+                if (
+                    error != null ||
+                    result == null
+                ) {
+
+                    return@addSnapshotListener
+                }
 
                 hackathonList.clear()
 
@@ -256,17 +262,30 @@ class OrganizerDashboardActivity
                             hackathon.title
                         )
 
-                        .get()
+                        .addSnapshotListener { applications, _ ->
 
-                        .addOnSuccessListener { applications ->
+                            val count =
+                                applications?.size() ?: 0
 
                             val updatedHackathon =
 
                                 hackathon.copy(
 
                                     applicantCount =
-                                        applications.size()
+                                        count
                                 )
+
+                            hackathonList.removeAll {
+
+                                it.documentId ==
+                                        updatedHackathon.documentId
+                            }
+
+                            allHackathons.removeAll {
+
+                                it.documentId ==
+                                        updatedHackathon.documentId
+                            }
 
                             hackathonList.add(
                                 updatedHackathon
@@ -284,7 +303,6 @@ class OrganizerDashboardActivity
                 }
             }
     }
-
     private fun filterHackathons(
         query: String
     ) {
