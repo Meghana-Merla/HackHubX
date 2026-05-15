@@ -196,6 +196,8 @@ class AddHackathonActivity
 
             else -> {
 
+                startLoading()
+
                 val organizerId =
                     com.google.firebase.auth
                         .FirebaseAuth
@@ -230,6 +232,8 @@ class AddHackathonActivity
 
                         .addOnSuccessListener {
 
+                            stopLoading()
+
                             showToast(
                                 "Hackathon Updated"
                             )
@@ -238,6 +242,8 @@ class AddHackathonActivity
                         }
 
                         .addOnFailureListener {
+
+                            stopLoading()
 
                             showToast(
                                 it.message.toString()
@@ -252,6 +258,8 @@ class AddHackathonActivity
 
                         .addOnSuccessListener {
 
+                            stopLoading()
+
                             showToast(
                                 "Hackathon Created"
                             )
@@ -261,12 +269,48 @@ class AddHackathonActivity
 
                         .addOnFailureListener {
 
+                            stopLoading()
+
                             showToast(
                                 it.message.toString()
                             )
                         }
                 }
             }
+        }
+    }
+
+    private fun startLoading() {
+
+        binding.btnCreateHackathon.isEnabled =
+            false
+
+        if (isEditMode) {
+
+            binding.btnCreateHackathon.text =
+                "Updating..."
+
+        } else {
+
+            binding.btnCreateHackathon.text =
+                "Creating..."
+        }
+    }
+
+    private fun stopLoading() {
+
+        binding.btnCreateHackathon.isEnabled =
+            true
+
+        if (isEditMode) {
+
+            binding.btnCreateHackathon.text =
+                "Update Hackathon"
+
+        } else {
+
+            binding.btnCreateHackathon.text =
+                "Create Hackathon"
         }
     }
 
