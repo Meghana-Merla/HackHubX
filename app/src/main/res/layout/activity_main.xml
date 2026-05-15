@@ -113,17 +113,35 @@
             android:padding="28dp">
 
             <TextView
+                android:id="@+id/tvName"
+
                 android:layout_width="wrap_content"
 
                 android:layout_height="wrap_content"
 
-                android:text="You are successfully logged in 🎉"
+                android:text="Welcome User 👋"
 
-                android:textSize="18sp"
+                android:textSize="24sp"
 
                 android:textStyle="bold"
 
                 android:textColor="@color/text_dark" />
+
+
+            <TextView
+                android:id="@+id/tvCollege"
+
+                android:layout_width="wrap_content"
+
+                android:layout_height="wrap_content"
+
+                android:text="College Name"
+
+                android:textSize="16sp"
+
+                android:textColor="@color/text_dark"
+
+                android:layout_marginTop="8dp" />
 
             <Button
                 android:id="@+id/btnLogout"
