@@ -1,6 +1,7 @@
 package com.meghana.hackhubx.ui.dashboard
 
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.auth.FirebaseAuth
@@ -81,6 +82,17 @@ class ApplicationsActivity : AppCompatActivity() {
                 }
 
                 adapter.notifyDataSetChanged()
+
+                if (applicationList.isEmpty()) {
+
+                    binding.tvEmptyApplications.visibility =
+                        View.VISIBLE
+
+                } else {
+
+                    binding.tvEmptyApplications.visibility =
+                        View.GONE
+                }
             }
     }
 }

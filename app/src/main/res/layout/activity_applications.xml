@@ -84,16 +84,40 @@
 
         app:layout_constraintEnd_toEndOf="parent">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerApplications"
-
+        <FrameLayout
             android:layout_width="match_parent"
 
-            android:layout_height="match_parent"
+            android:layout_height="match_parent">
 
-            android:paddingTop="10dp"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerApplications"
 
-            android:paddingBottom="20dp" />
+                android:layout_width="match_parent"
+
+                android:layout_height="match_parent"
+
+                android:paddingTop="10dp"
+
+                android:paddingBottom="20dp" />
+
+            <TextView
+                android:id="@+id/tvEmptyApplications"
+
+                android:layout_width="wrap_content"
+
+                android:layout_height="wrap_content"
+
+                android:text="No applications yet"
+
+                android:textSize="16sp"
+
+                android:textColor="@color/text_dark"
+
+                android:visibility="gone"
+
+                android:layout_gravity="center" />
+
+        </FrameLayout>
 
     </androidx.cardview.widget.CardView>
 
