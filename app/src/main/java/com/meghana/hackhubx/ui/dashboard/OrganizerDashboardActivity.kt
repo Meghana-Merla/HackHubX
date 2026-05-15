@@ -2,6 +2,8 @@ package com.meghana.hackhubx.ui.dashboard
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.auth.FirebaseAuth
@@ -9,7 +11,8 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.meghana.hackhubx.adapter.HackathonAdapter
 import com.meghana.hackhubx.databinding.ActivityOrganizerDashboardBinding
 import com.meghana.hackhubx.model.Hackathon
-import androidx.appcompat.app.AlertDialog
+import android.text.Editable
+import android.text.TextWatcher
 
 class OrganizerDashboardActivity
     : AppCompatActivity() {
@@ -22,6 +25,9 @@ class OrganizerDashboardActivity
 
     private lateinit var auth:
             FirebaseAuth
+
+    private val allHackathons =
+        mutableListOf<Hackathon>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,16 +58,49 @@ class OrganizerDashboardActivity
                 )
             }
 
-        binding.btnProfile.setOnClickListener {
+        binding.btnProfile
+            .setOnClickListener {
 
-            startActivity(
+                startActivity(
 
-                Intent(
-                    this,
-                    ProfileActivity::class.java
+                    Intent(
+                        this,
+                        ProfileActivity::class.java
+                    )
                 )
+            }
+
+        binding.etSearchMyHackathons
+            .addTextChangedListener(
+
+                object : android.text.TextWatcher {
+
+                    override fun beforeTextChanged(
+                        s: CharSequence?,
+                        start: Int,
+                        count: Int,
+                        after: Int
+                    ) {
+                    }
+
+                    override fun onTextChanged(
+                        s: CharSequence?,
+                        start: Int,
+                        before: Int,
+                        count: Int
+                    ) {
+
+                        filterHackathons(
+                            s.toString()
+                        )
+                    }
+
+                    override fun afterTextChanged(
+                        s: android.text.Editable?
+                    ) {
+                    }
+                }
             )
-        }
     }
 
     private fun setupMyHackathons() {
@@ -149,6 +188,7 @@ class OrganizerDashboardActivity
                 },
 
                 { hackathon ->
+
                     val intent =
 
                         Intent(
@@ -185,6 +225,19 @@ class OrganizerDashboardActivity
 
                 hackathonList.clear()
 
+                allHackathons.clear()
+
+                if (result.isEmpty) {
+
+                    binding.tvEmptyState.visibility =
+                        View.VISIBLE
+
+                } else {
+
+                    binding.tvEmptyState.visibility =
+                        View.GONE
+                }
+
                 for (document in result) {
 
                     val hackathon =
@@ -219,24 +272,133 @@ class OrganizerDashboardActivity
                                 updatedHackathon
                             )
 
+                            allHackathons.add(
+                                updatedHackathon
+                            )
+
                             adapter.notifyDataSetChanged()
+
+                            binding.tvEmptyState.visibility =
+                                View.GONE
                         }
-                }
-
-                adapter.notifyDataSetChanged()
-
-                if (hackathonList.isEmpty()) {
-
-                    binding.tvEmptyState.visibility =
-                        android.view.View.VISIBLE
-
-                } else {
-
-                    binding.tvEmptyState.visibility =
-                        android.view.View.GONE
                 }
             }
     }
+
+    private fun filterHackathons(
+        query: String
+    ) {
+
+        val filteredList =
+
+            allHackathons.filter {
+
+                it.title.contains(
+                    query,
+                    ignoreCase = true
+                )
+            }
+
+        val adapter =
+
+            HackathonAdapter(
+
+                filteredList,
+
+                emptySet(),
+
+                null,
+
+                { hackathon ->
+
+                    androidx.appcompat.app
+                        .AlertDialog
+                        .Builder(this)
+
+                        .setTitle(
+                            "Delete Hackathon"
+                        )
+
+                        .setMessage(
+                            "Are you sure you want to delete this hackathon?"
+                        )
+
+                        .setPositiveButton(
+                            "Delete"
+                        ) { _, _ ->
+
+                            deleteHackathon(
+                                hackathon
+                            )
+                        }
+
+                        .setNegativeButton(
+                            "Cancel",
+                            null
+                        )
+
+                        .show()
+                },
+
+                { hackathon ->
+
+                    val intent =
+
+                        Intent(
+                            this,
+                            AddHackathonActivity::class.java
+                        )
+
+                    intent.putExtra(
+                        "title",
+                        hackathon.title
+                    )
+
+                    intent.putExtra(
+                        "prize",
+                        hackathon.prize
+                    )
+
+                    intent.putExtra(
+                        "teamSize",
+                        hackathon.teamSize
+                    )
+
+                    intent.putExtra(
+                        "deadline",
+                        hackathon.deadline
+                    )
+
+                    intent.putExtra(
+                        "documentId",
+                        hackathon.documentId
+                    )
+
+                    startActivity(intent)
+                },
+
+                { hackathon ->
+
+                    val intent =
+
+                        Intent(
+                            this,
+                            ApplicantsActivity::class.java
+                        )
+
+                    intent.putExtra(
+                        "hackathonTitle",
+                        hackathon.title
+                    )
+
+                    startActivity(intent)
+                }
+            )
+
+        binding.recyclerMyHackathons.adapter =
+            adapter
+    }
+
     private fun deleteHackathon(
         hackathon: Hackathon
     ) {

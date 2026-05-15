@@ -139,6 +139,25 @@
 
                 android:textColor="@color/text_dark" />
 
+            <EditText
+                android:id="@+id/etSearchMyHackathons"
+
+                android:layout_width="match_parent"
+
+                android:layout_height="56dp"
+
+                android:layout_marginTop="20dp"
+
+                android:hint="Search your hackathons"
+
+                android:paddingStart="16dp"
+
+                android:paddingEnd="16dp"
+
+                android:backgroundTint="@color/grape_primary"
+
+                android:inputType="text" />
+
             <Button
                 android:id="@+id/btnAddHackathon"
 
