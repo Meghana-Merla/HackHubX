@@ -123,6 +123,13 @@ class AddHackathonActivity
 
             else -> {
 
+                val organizerId =
+                    com.google.firebase.auth
+                        .FirebaseAuth
+                        .getInstance()
+                        .currentUser
+                        ?.uid ?: ""
+
                 val hackathon = Hackathon(
 
                     title = title,
@@ -133,7 +140,9 @@ class AddHackathonActivity
                     teamSize =
                         "$minTeamSize-$maxTeamSize",
 
-                    deadline = deadline
+                    deadline = deadline,
+
+                    organizerId = organizerId
                 )
 
                 firestore.collection(

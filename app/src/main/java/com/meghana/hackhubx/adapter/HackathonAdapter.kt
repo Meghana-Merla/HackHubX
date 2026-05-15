@@ -15,6 +15,9 @@ class HackathonAdapter(
     Set<String>,
 
     private val onApplyClick:
+    ((Hackathon) -> Unit)?,
+
+    private val onDeleteClick:
     ((Hackathon) -> Unit)?
 ):
 
@@ -102,6 +105,25 @@ class HackathonAdapter(
         } else {
 
             holder.binding.btnApply.visibility =
+                android.view.View.GONE
+        }
+
+        if (onDeleteClick != null) {
+
+            holder.binding.btnDelete.visibility =
+                android.view.View.VISIBLE
+
+            holder.binding.btnDelete
+                .setOnClickListener {
+
+                    onDeleteClick.invoke(
+                        hackathon
+                    )
+                }
+
+        } else {
+
+            holder.binding.btnDelete.visibility =
                 android.view.View.GONE
         }
     }

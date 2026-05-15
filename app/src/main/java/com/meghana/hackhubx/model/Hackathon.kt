@@ -8,5 +8,7 @@ data class Hackathon(
 
     val teamSize: String = "",
 
-    val deadline: String = ""
+    val deadline: String = "",
+
+    val organizerId: String = ""
 )

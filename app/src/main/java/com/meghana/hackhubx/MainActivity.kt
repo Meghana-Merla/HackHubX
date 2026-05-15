@@ -134,16 +134,22 @@ class MainActivity : AppCompatActivity() {
             mutableListOf<Hackathon>()
 
         val adapter =
+
             HackathonAdapter(
 
                 hackathonList,
 
-                appliedHackathons
+                appliedHackathons,
 
-            ) { hackathon ->
+                { hackathon ->
 
-                applyToHackathon(hackathon)
-            }
+                    applyToHackathon(
+                        hackathon
+                    )
+                },
+
+                null
+            )
 
         binding.recyclerHackathons.layoutManager =
             LinearLayoutManager(this)

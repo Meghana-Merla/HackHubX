@@ -3,13 +3,24 @@ package com.meghana.hackhubx.ui.dashboard
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
+import com.meghana.hackhubx.adapter.HackathonAdapter
 import com.meghana.hackhubx.databinding.ActivityOrganizerDashboardBinding
+import com.meghana.hackhubx.model.Hackathon
 
 class OrganizerDashboardActivity
     : AppCompatActivity() {
 
     private lateinit var binding:
             ActivityOrganizerDashboardBinding
+
+    private lateinit var firestore:
+            FirebaseFirestore
+
+    private lateinit var auth:
+            FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -19,6 +30,14 @@ class OrganizerDashboardActivity
                 .inflate(layoutInflater)
 
         setContentView(binding.root)
+
+        firestore =
+            FirebaseFirestore.getInstance()
+
+        auth =
+            FirebaseAuth.getInstance()
+
+        setupMyHackathons()
 
         binding.btnAddHackathon
             .setOnClickListener {
@@ -44,4 +63,103 @@ class OrganizerDashboardActivity
         }
     }
 
+    private fun setupMyHackathons() {
+
+        val organizerId =
+            auth.currentUser?.uid ?: return
+
+        val hackathonList =
+            mutableListOf<Hackathon>()
+
+        val adapter =
+
+            HackathonAdapter(
+
+                hackathonList,
+
+                emptySet(),
+
+                null,
+
+                { hackathon ->
+
+                    deleteHackathon(
+                        hackathon
+                    )
+                }
+            )
+
+        binding.recyclerMyHackathons
+            .layoutManager =
+            LinearLayoutManager(this)
+
+        binding.recyclerMyHackathons
+            .adapter = adapter
+
+        firestore.collection("hackathons")
+
+            .whereEqualTo(
+                "organizerId",
+                organizerId
+            )
+
+            .get()
+
+            .addOnSuccessListener { result ->
+
+                hackathonList.clear()
+
+                for (document in result) {
+
+                    val hackathon =
+                        document.toObject(
+                            Hackathon::class.java
+                        )
+
+                    hackathonList.add(
+                        hackathon
+                    )
+                }
+
+                adapter.notifyDataSetChanged()
+            }
+    }
+    private fun deleteHackathon(
+        hackathon: Hackathon
+    ) {
+
+        firestore.collection("hackathons")
+
+            .whereEqualTo(
+                "title",
+                hackathon.title
+            )
+
+            .whereEqualTo(
+                "organizerId",
+                auth.currentUser?.uid
+            )
+
+            .get()
+
+            .addOnSuccessListener { result ->
+
+                for (document in result) {
+
+                    firestore.collection("hackathons")
+
+                        .document(document.id)
+
+                        .delete()
+                }
+
+                setupMyHackathons()
+            }
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        setupMyHackathons()
+    }
 }
