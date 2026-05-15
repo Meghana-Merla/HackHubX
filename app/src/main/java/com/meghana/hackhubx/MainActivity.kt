@@ -11,6 +11,7 @@ import com.meghana.hackhubx.databinding.ActivityMainBinding
 import com.meghana.hackhubx.model.Hackathon
 import com.meghana.hackhubx.model.User
 import com.meghana.hackhubx.ui.auth.LoginActivity
+import com.meghana.hackhubx.model.Application
 
 class MainActivity : AppCompatActivity() {
 
@@ -103,12 +104,55 @@ class MainActivity : AppCompatActivity() {
         )
 
         val adapter =
-            HackathonAdapter(hackathonList)
+            HackathonAdapter(
+                hackathonList
+            ) { hackathon ->
 
+                applyToHackathon(hackathon)
+            }
         binding.recyclerHackathons.layoutManager =
             LinearLayoutManager(this)
 
         binding.recyclerHackathons.adapter =
             adapter
+    }
+    private fun applyToHackathon(
+        hackathon: Hackathon
+    ) {
+
+        val uid =
+            auth.currentUser?.uid ?: return
+
+        val application = Application(
+
+            userId = uid,
+
+            hackathonTitle =
+                hackathon.title,
+
+            timestamp =
+                System.currentTimeMillis()
+        )
+
+        firestore.collection("applications")
+            .add(application)
+
+            .addOnSuccessListener {
+
+                android.widget.Toast.makeText(
+                    this,
+                    "Applied Successfully",
+                    android.widget.Toast.LENGTH_SHORT
+                ).show()
+            }
+
+            .addOnFailureListener {
+
+                android.widget.Toast.makeText(
+                    this,
+                    it.message,
+                    android.widget.Toast.LENGTH_SHORT
+                ).show()
+            }
     }
 }

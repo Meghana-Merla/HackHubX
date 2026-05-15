@@ -7,9 +7,13 @@ import com.meghana.hackhubx.databinding.ItemHackathonBinding
 import com.meghana.hackhubx.model.Hackathon
 
 class HackathonAdapter(
+
     private val hackathonList:
-    List<Hackathon>
-) :
+    List<Hackathon>,
+
+    private val onApplyClick:
+        (Hackathon) -> Unit
+):
 
     RecyclerView.Adapter<
             HackathonAdapter.HackathonViewHolder>() {
@@ -57,6 +61,11 @@ class HackathonAdapter(
 
         holder.binding.tvDeadline.text =
             "Deadline: ${hackathon.deadline}"
+
+        holder.binding.btnApply.setOnClickListener {
+
+            onApplyClick(hackathon)
+        }
     }
 
     override fun getItemCount(): Int {
