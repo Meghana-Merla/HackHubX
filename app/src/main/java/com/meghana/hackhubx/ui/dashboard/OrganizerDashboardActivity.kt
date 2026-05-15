@@ -186,6 +186,17 @@ class OrganizerDashboardActivity
                 }
 
                 adapter.notifyDataSetChanged()
+
+                if (hackathonList.isEmpty()) {
+
+                    binding.tvEmptyState.visibility =
+                        android.view.View.VISIBLE
+
+                } else {
+
+                    binding.tvEmptyState.visibility =
+                        android.view.View.GONE
+                }
             }
     }
     private fun deleteHackathon(
