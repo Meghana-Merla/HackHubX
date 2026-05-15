@@ -21,6 +21,9 @@ class HackathonAdapter(
     ((Hackathon) -> Unit)?,
 
     private val onEditClick:
+    ((Hackathon) -> Unit)?,
+
+    private val onViewApplicantsClick:
     ((Hackathon) -> Unit)?
 ):
 
@@ -127,6 +130,25 @@ class HackathonAdapter(
         } else {
 
             holder.binding.btnEdit.visibility =
+                android.view.View.GONE
+        }
+
+        if (onViewApplicantsClick != null) {
+
+            holder.binding.btnViewApplicants.visibility =
+                android.view.View.VISIBLE
+
+            holder.binding.btnViewApplicants
+                .setOnClickListener {
+
+                    onViewApplicantsClick.invoke(
+                        hackathon
+                    )
+                }
+
+        } else {
+
+            holder.binding.btnViewApplicants.visibility =
                 android.view.View.GONE
         }
 

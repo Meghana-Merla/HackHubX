@@ -146,6 +146,22 @@ class OrganizerDashboardActivity
                     )
 
                     startActivity(intent)
+                },
+
+                { hackathon ->
+                    val intent =
+
+                        Intent(
+                            this,
+                            ApplicantsActivity::class.java
+                        )
+
+                    intent.putExtra(
+                        "hackathonTitle",
+                        hackathon.title
+                    )
+
+                    startActivity(intent)
                 }
             )
 
