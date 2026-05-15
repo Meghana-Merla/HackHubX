@@ -13,6 +13,8 @@ import com.meghana.hackhubx.model.Hackathon
 import com.meghana.hackhubx.model.User
 import com.meghana.hackhubx.ui.dashboard.ApplicationsActivity
 import com.meghana.hackhubx.ui.dashboard.ProfileActivity
+import android.text.TextWatcher
+import android.text.Editable
 
 class MainActivity : AppCompatActivity() {
 
@@ -26,6 +28,9 @@ class MainActivity : AppCompatActivity() {
 
     private val appliedHackathons =
         mutableSetOf<String>()
+
+    private val allHackathons =
+        mutableListOf<Hackathon>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -67,6 +72,39 @@ class MainActivity : AppCompatActivity() {
                     )
                 )
             }
+
+        binding.etSearchHackathons
+            .addTextChangedListener(
+
+                object :
+                    android.text.TextWatcher {
+
+                    override fun beforeTextChanged(
+                        s: CharSequence?,
+                        start: Int,
+                        count: Int,
+                        after: Int
+                    ) {
+                    }
+
+                    override fun onTextChanged(
+                        s: CharSequence?,
+                        start: Int,
+                        before: Int,
+                        count: Int
+                    ) {
+
+                        filterHackathons(
+                            s.toString()
+                        )
+                    }
+
+                    override fun afterTextChanged(
+                        s: android.text.Editable?
+                    ) {
+                    }
+                }
+            )
     }
 
     private fun loadUserData() {
@@ -168,6 +206,8 @@ class MainActivity : AppCompatActivity() {
 
                 hackathonList.clear()
 
+                allHackathons.clear()
+
                 for (document in result) {
 
                     val hackathon =
@@ -180,10 +220,52 @@ class MainActivity : AppCompatActivity() {
                         )
 
                     hackathonList.add(hackathon)
+
+                    allHackathons.add(hackathon)
                 }
 
                 adapter.notifyDataSetChanged()
             }
+    }
+
+    private fun filterHackathons(
+        query: String
+    ) {
+
+        val filteredList =
+
+            allHackathons.filter {
+
+                it.title.contains(
+                    query,
+                    ignoreCase = true
+                )
+            }
+
+        val adapter =
+
+            HackathonAdapter(
+
+                filteredList,
+
+                appliedHackathons,
+
+                { hackathon ->
+
+                    applyToHackathon(
+                        hackathon
+                    )
+                },
+
+                null,
+
+                null,
+
+                null
+            )
+
+        binding.recyclerHackathons.adapter =
+            adapter
     }
 
     private fun applyToHackathon(
