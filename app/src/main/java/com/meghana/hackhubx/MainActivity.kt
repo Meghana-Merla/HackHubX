@@ -148,6 +148,8 @@ class MainActivity : AppCompatActivity() {
                     )
                 },
 
+                null,
+
                 null
             )
 
@@ -169,6 +171,10 @@ class MainActivity : AppCompatActivity() {
                     val hackathon =
                         document.toObject(
                             Hackathon::class.java
+                        ).copy(
+
+                            documentId =
+                                document.id
                         )
 
                     hackathonList.add(hackathon)

@@ -86,6 +86,43 @@ class OrganizerDashboardActivity
                     deleteHackathon(
                         hackathon
                     )
+                },
+
+                { hackathon ->
+
+                    val intent =
+
+                        Intent(
+                            this,
+                            AddHackathonActivity::class.java
+                        )
+
+                    intent.putExtra(
+                        "title",
+                        hackathon.title
+                    )
+
+                    intent.putExtra(
+                        "prize",
+                        hackathon.prize
+                    )
+
+                    intent.putExtra(
+                        "teamSize",
+                        hackathon.teamSize
+                    )
+
+                    intent.putExtra(
+                        "deadline",
+                        hackathon.deadline
+                    )
+
+                    intent.putExtra(
+                        "documentId",
+                        hackathon.documentId
+                    )
+
+                    startActivity(intent)
                 }
             )
 
@@ -114,6 +151,10 @@ class OrganizerDashboardActivity
                     val hackathon =
                         document.toObject(
                             Hackathon::class.java
+                        ).copy(
+
+                            documentId =
+                                document.id
                         )
 
                     hackathonList.add(

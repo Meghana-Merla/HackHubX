@@ -1,13 +1,13 @@
 package com.meghana.hackhubx.ui.dashboard
 
+import android.app.DatePickerDialog
+import android.app.TimePickerDialog
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.firestore.FirebaseFirestore
 import com.meghana.hackhubx.databinding.ActivityAddHackathonBinding
 import com.meghana.hackhubx.model.Hackathon
-import android.app.DatePickerDialog
-import android.app.TimePickerDialog
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
@@ -21,6 +21,13 @@ class AddHackathonActivity
     private lateinit var firestore:
             FirebaseFirestore
 
+    private var isEditMode =
+        false
+
+    private var oldTitle = ""
+
+    private var documentId = ""
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -33,14 +40,80 @@ class AddHackathonActivity
         firestore =
             FirebaseFirestore.getInstance()
 
+        checkEditMode()
+
         binding.btnCreateHackathon
             .setOnClickListener {
 
                 createHackathon()
             }
-        binding.etDeadline.setOnClickListener {
 
-            showDatePicker()
+        binding.etDeadline
+            .setOnClickListener {
+
+                showDatePicker()
+            }
+    }
+
+    private fun checkEditMode() {
+
+        val title =
+            intent.getStringExtra("title")
+
+        if (title != null) {
+
+            isEditMode = true
+
+            oldTitle = title
+
+            documentId =
+                intent.getStringExtra(
+                    "documentId"
+                ) ?: ""
+
+            binding.etTitle.setText(title)
+
+            val prize =
+                intent.getStringExtra(
+                    "prize"
+                ) ?: ""
+
+            val prizeParts =
+                prize.split(" ")
+
+            if (prizeParts.size >= 2) {
+
+                binding.etPrize.setText(
+                    prizeParts.last()
+                )
+            }
+
+            val teamSize =
+                intent.getStringExtra(
+                    "teamSize"
+                ) ?: ""
+
+            val teamParts =
+                teamSize.split("-")
+
+            if (teamParts.size == 2) {
+
+                binding.etMinTeamSize
+                    .setText(teamParts[0])
+
+                binding.etMaxTeamSize
+                    .setText(teamParts[1])
+            }
+
+            binding.etDeadline.setText(
+
+                intent.getStringExtra(
+                    "deadline"
+                )
+            )
+
+            binding.btnCreateHackathon.text =
+                "Update Hackathon"
         }
     }
 
@@ -142,34 +215,61 @@ class AddHackathonActivity
 
                     deadline = deadline,
 
-                    organizerId = organizerId
+                    organizerId = organizerId,
+
+                    documentId = documentId
                 )
 
-                firestore.collection(
-                    "hackathons"
-                )
+                if (isEditMode) {
 
-                    .add(hackathon)
+                    firestore.collection("hackathons")
 
-                    .addOnSuccessListener {
+                        .document(documentId)
 
-                        showToast(
-                            "Hackathon Created"
-                        )
+                        .set(hackathon)
 
-                        finish()
-                    }
+                        .addOnSuccessListener {
 
-                    .addOnFailureListener {
+                            showToast(
+                                "Hackathon Updated"
+                            )
 
-                        showToast(
-                            it.message.toString()
-                        )
-                    }
+                            finish()
+                        }
+
+                        .addOnFailureListener {
+
+                            showToast(
+                                it.message.toString()
+                            )
+                        }
+
+                } else {
+
+                    firestore.collection("hackathons")
+
+                        .add(hackathon)
+
+                        .addOnSuccessListener {
+
+                            showToast(
+                                "Hackathon Created"
+                            )
+
+                            finish()
+                        }
+
+                        .addOnFailureListener {
+
+                            showToast(
+                                it.message.toString()
+                            )
+                        }
+                }
             }
         }
-
     }
+
     private fun showDatePicker() {
 
         val calendar =
@@ -213,6 +313,7 @@ class AddHackathonActivity
 
         datePickerDialog.show()
     }
+
     private fun showTimePicker(
         calendar: Calendar
     ) {
