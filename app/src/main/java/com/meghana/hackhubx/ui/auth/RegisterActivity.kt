@@ -13,7 +13,8 @@ class RegisterActivity : AppCompatActivity() {
     private lateinit var binding:
             ActivityRegisterBinding
 
-    private lateinit var auth: FirebaseAuth
+    private lateinit var auth:
+            FirebaseAuth
 
     private lateinit var firestore:
             FirebaseFirestore
@@ -22,7 +23,9 @@ class RegisterActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         binding =
-            ActivityRegisterBinding.inflate(layoutInflater)
+            ActivityRegisterBinding.inflate(
+                layoutInflater
+            )
 
         setContentView(binding.root)
 
@@ -34,16 +37,24 @@ class RegisterActivity : AppCompatActivity() {
         binding.btnRegister.setOnClickListener {
 
             val name =
-                binding.etName.text.toString().trim()
+                binding.etName.text
+                    .toString()
+                    .trim()
 
             val college =
-                binding.etCollege.text.toString().trim()
+                binding.etCollege.text
+                    .toString()
+                    .trim()
 
             val email =
-                binding.etEmail.text.toString().trim()
+                binding.etEmail.text
+                    .toString()
+                    .trim()
 
             val password =
-                binding.etPassword.text.toString().trim()
+                binding.etPassword.text
+                    .toString()
+                    .trim()
 
             val confirmPassword =
                 binding.etConfirmPassword.text
@@ -65,27 +76,37 @@ class RegisterActivity : AppCompatActivity() {
 
                 name.isEmpty() -> {
 
-                    showToast("Enter name")
+                    showToast(
+                        "Enter name"
+                    )
                 }
 
                 college.isEmpty() -> {
 
-                    showToast("Enter college name")
+                    showToast(
+                        "Enter college name"
+                    )
                 }
 
                 email.isEmpty() -> {
 
-                    showToast("Enter email")
+                    showToast(
+                        "Enter email"
+                    )
                 }
 
                 password.isEmpty() -> {
 
-                    showToast("Enter password")
+                    showToast(
+                        "Enter password"
+                    )
                 }
 
                 confirmPassword.isEmpty() -> {
 
-                    showToast("Confirm password")
+                    showToast(
+                        "Confirm password"
+                    )
                 }
 
                 password != confirmPassword -> {
@@ -122,6 +143,7 @@ class RegisterActivity : AppCompatActivity() {
             }
         }
     }
+
     private fun registerUser(
         name: String,
         college: String,
@@ -129,6 +151,8 @@ class RegisterActivity : AppCompatActivity() {
         password: String,
         role: String
     ) {
+
+        startLoading()
 
         auth.createUserWithEmailAndPassword(
             email,
@@ -159,6 +183,8 @@ class RegisterActivity : AppCompatActivity() {
 
                     .addOnSuccessListener {
 
+                        stopLoading()
+
                         showToast(
                             "Registration Successful"
                         )
@@ -168,12 +194,16 @@ class RegisterActivity : AppCompatActivity() {
 
                     .addOnFailureListener {
 
+                        stopLoading()
+
                         showToast(
                             it.message.toString()
                         )
                     }
 
             } else {
+
+                stopLoading()
 
                 showToast(
                     it.exception?.message.toString()
@@ -182,7 +212,27 @@ class RegisterActivity : AppCompatActivity() {
         }
     }
 
-    private fun showToast(message: String) {
+    private fun startLoading() {
+
+        binding.btnRegister.isEnabled =
+            false
+
+        binding.btnRegister.text =
+            "Creating Account..."
+    }
+
+    private fun stopLoading() {
+
+        binding.btnRegister.isEnabled =
+            true
+
+        binding.btnRegister.text =
+            "Register"
+    }
+
+    private fun showToast(
+        message: String
+    ) {
 
         Toast.makeText(
             this,
