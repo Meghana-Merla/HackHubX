@@ -138,6 +138,10 @@ class HackathonAdapter(
             holder.binding.btnViewApplicants.visibility =
                 android.view.View.VISIBLE
 
+            holder.binding.btnViewApplicants.text =
+
+                "View Applicants (${hackathon.applicantCount})"
+
             holder.binding.btnViewApplicants
                 .setOnClickListener {
 

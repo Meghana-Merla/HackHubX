@@ -196,9 +196,31 @@ class OrganizerDashboardActivity
                                 document.id
                         )
 
-                    hackathonList.add(
-                        hackathon
-                    )
+                    firestore.collection("applications")
+
+                        .whereEqualTo(
+                            "hackathonTitle",
+                            hackathon.title
+                        )
+
+                        .get()
+
+                        .addOnSuccessListener { applications ->
+
+                            val updatedHackathon =
+
+                                hackathon.copy(
+
+                                    applicantCount =
+                                        applications.size()
+                                )
+
+                            hackathonList.add(
+                                updatedHackathon
+                            )
+
+                            adapter.notifyDataSetChanged()
+                        }
                 }
 
                 adapter.notifyDataSetChanged()

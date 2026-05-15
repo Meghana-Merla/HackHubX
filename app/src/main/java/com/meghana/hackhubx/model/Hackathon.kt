@@ -12,5 +12,7 @@ data class Hackathon(
 
     val organizerId: String = "",
 
-    val documentId: String = ""
+    val documentId: String = "",
+
+    val applicantCount: Int = 0
 )
