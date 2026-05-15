@@ -50,6 +50,17 @@ class RegisterActivity : AppCompatActivity() {
                     .toString()
                     .trim()
 
+            val role = when {
+
+                binding.radioCandidate.isChecked ->
+                    "candidate"
+
+                binding.radioOrganizer.isChecked ->
+                    "organizer"
+
+                else -> ""
+            }
+
             when {
 
                 name.isEmpty() -> {
@@ -84,6 +95,13 @@ class RegisterActivity : AppCompatActivity() {
                     )
                 }
 
+                role.isEmpty() -> {
+
+                    showToast(
+                        "Select role"
+                    )
+                }
+
                 password.length < 6 -> {
 
                     showToast(
@@ -97,18 +115,19 @@ class RegisterActivity : AppCompatActivity() {
                         name,
                         college,
                         email,
-                        password
+                        password,
+                        role
                     )
                 }
             }
         }
     }
-
     private fun registerUser(
         name: String,
         college: String,
         email: String,
-        password: String
+        password: String,
+        role: String
     ) {
 
         auth.createUserWithEmailAndPassword(
@@ -129,7 +148,9 @@ class RegisterActivity : AppCompatActivity() {
 
                     college = college,
 
-                    email = email
+                    email = email,
+
+                    role = role
                 )
 
                 firestore.collection("users")

@@ -35,6 +35,11 @@
 
             android:exported="false" />
         <activity
+            android:name=
+                ".ui.dashboard.OrganizerDashboardActivity"
+
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true" />
     </application>

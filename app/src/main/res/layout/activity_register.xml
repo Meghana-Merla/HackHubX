@@ -301,6 +301,47 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
+            <RadioGroup
+                android:id="@+id/radioGroupRole"
+
+                android:layout_width="match_parent"
+
+                android:layout_height="wrap_content"
+
+                android:layout_marginTop="20dp"
+
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/radioCandidate"
+
+                    android:layout_width="wrap_content"
+
+                    android:layout_height="wrap_content"
+
+                    android:text="Candidate"
+
+                    android:textColor="@color/text_dark"
+
+                    android:textStyle="bold" />
+
+                <RadioButton
+                    android:id="@+id/radioOrganizer"
+
+                    android:layout_width="wrap_content"
+
+                    android:layout_height="wrap_content"
+
+                    android:text="Organizer"
+
+                    android:textColor="@color/text_dark"
+
+                    android:textStyle="bold"
+
+                    android:layout_marginStart="20dp" />
+
+            </RadioGroup>
+
             <!-- Register Button -->
 
             <Button

@@ -69,20 +69,54 @@ class LoginActivity : AppCompatActivity() {
 
             if (it.isSuccessful) {
 
-                Toast.makeText(
-                    this,
-                    "Login Successful",
-                    Toast.LENGTH_SHORT
-                ).show()
+                val uid =
+                    auth.currentUser?.uid ?: return@addOnCompleteListener
 
-                startActivity(
-                    Intent(
-                        this,
-                        MainActivity::class.java
-                    )
-                )
+                com.google.firebase.firestore.FirebaseFirestore
+                    .getInstance()
 
-                finish()
+                    .collection("users")
+
+                    .document(uid)
+
+                    .get()
+
+                    .addOnSuccessListener { document ->
+
+                        val role =
+                            document.getString("role")
+
+                        Toast.makeText(
+                            this,
+                            "Login Successful",
+                            Toast.LENGTH_SHORT
+                        ).show()
+
+                        if (role == "organizer") {
+
+                            startActivity(
+
+                                Intent(
+                                    this,
+                                    com.meghana.hackhubx
+                                        .ui.dashboard
+                                        .OrganizerDashboardActivity::class.java
+                                )
+                            )
+
+                        } else {
+
+                            startActivity(
+
+                                Intent(
+                                    this,
+                                    MainActivity::class.java
+                                )
+                            )
+                        }
+
+                        finish()
+                    }
 
             } else {
 

@@ -8,5 +8,7 @@ data class User(
 
     val college: String = "",
 
-    val email: String = ""
+    val email: String = "",
+
+    val role: String = ""
 )
