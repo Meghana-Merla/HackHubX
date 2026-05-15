@@ -11,8 +11,8 @@ import com.meghana.hackhubx.databinding.ActivityMainBinding
 import com.meghana.hackhubx.model.Application
 import com.meghana.hackhubx.model.Hackathon
 import com.meghana.hackhubx.model.User
-import com.meghana.hackhubx.ui.auth.LoginActivity
 import com.meghana.hackhubx.ui.dashboard.ApplicationsActivity
+import com.meghana.hackhubx.ui.dashboard.ProfileActivity
 
 class MainActivity : AppCompatActivity() {
 
@@ -23,6 +23,9 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var firestore:
             FirebaseFirestore
+
+    private val appliedHackathons =
+        mutableSetOf<String>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,9 +42,10 @@ class MainActivity : AppCompatActivity() {
 
         loadUserData()
 
-        setupHackathons()
+        loadAppliedHackathons()
 
-        binding.btnMyApplications.setOnClickListener {
+        binding.btnMyApplications
+            .setOnClickListener {
 
                 startActivity(
 
@@ -52,18 +56,17 @@ class MainActivity : AppCompatActivity() {
                 )
             }
 
-        binding.btnProfile.setOnClickListener {
+        binding.btnProfile
+            .setOnClickListener {
 
-            startActivity(
+                startActivity(
 
-                Intent(
-                    this,
-                    com.meghana.hackhubx
-                        .ui.dashboard
-                        .ProfileActivity::class.java
+                    Intent(
+                        this,
+                        ProfileActivity::class.java
+                    )
                 )
-            )
-        }
+            }
     }
 
     private fun loadUserData() {
@@ -88,6 +91,43 @@ class MainActivity : AppCompatActivity() {
             }
     }
 
+    private fun loadAppliedHackathons() {
+
+        val uid =
+            auth.currentUser?.uid ?: return
+
+        firestore.collection("applications")
+
+            .whereEqualTo(
+                "userId",
+                uid
+            )
+
+            .get()
+
+            .addOnSuccessListener { result ->
+
+                appliedHackathons.clear()
+
+                for (document in result) {
+
+                    val title =
+                        document.getString(
+                            "hackathonTitle"
+                        )
+
+                    if (title != null) {
+
+                        appliedHackathons.add(
+                            title
+                        )
+                    }
+                }
+
+                setupHackathons()
+            }
+    }
+
     private fun setupHackathons() {
 
         val hackathonList =
@@ -95,7 +135,11 @@ class MainActivity : AppCompatActivity() {
 
         val adapter =
             HackathonAdapter(
-                hackathonList
+
+                hackathonList,
+
+                appliedHackathons
+
             ) { hackathon ->
 
                 applyToHackathon(hackathon)
@@ -135,36 +179,70 @@ class MainActivity : AppCompatActivity() {
         val uid =
             auth.currentUser?.uid ?: return
 
-        val application = Application(
-
-            userId = uid,
-
-            hackathonTitle =
-                hackathon.title,
-
-            timestamp =
-                System.currentTimeMillis()
-        )
-
         firestore.collection("applications")
-            .add(application)
 
-            .addOnSuccessListener {
+            .whereEqualTo(
+                "userId",
+                uid
+            )
 
-                android.widget.Toast.makeText(
-                    this,
-                    "Applied Successfully",
-                    android.widget.Toast.LENGTH_SHORT
-                ).show()
-            }
+            .whereEqualTo(
+                "hackathonTitle",
+                hackathon.title
+            )
 
-            .addOnFailureListener {
+            .get()
 
-                android.widget.Toast.makeText(
-                    this,
-                    it.message,
-                    android.widget.Toast.LENGTH_SHORT
-                ).show()
+            .addOnSuccessListener { result ->
+
+                if (!result.isEmpty) {
+
+                    android.widget.Toast.makeText(
+                        this,
+                        "Already Applied",
+                        android.widget.Toast.LENGTH_SHORT
+                    ).show()
+
+                } else {
+
+                    val application = Application(
+
+                        userId = uid,
+
+                        hackathonTitle =
+                            hackathon.title,
+
+                        timestamp =
+                            System.currentTimeMillis()
+                    )
+
+                    firestore.collection("applications")
+                        .add(application)
+
+                        .addOnSuccessListener {
+
+                            appliedHackathons.add(
+                                hackathon.title
+                            )
+
+                            setupHackathons()
+
+                            android.widget.Toast.makeText(
+                                this,
+                                "Applied Successfully",
+                                android.widget.Toast.LENGTH_SHORT
+                            ).show()
+                        }
+
+                        .addOnFailureListener {
+
+                            android.widget.Toast.makeText(
+                                this,
+                                it.message,
+                                android.widget.Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                }
             }
     }
 }

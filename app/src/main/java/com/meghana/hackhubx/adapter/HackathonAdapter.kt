@@ -11,6 +11,9 @@ class HackathonAdapter(
     private val hackathonList:
     List<Hackathon>,
 
+    private val appliedHackathons:
+    Set<String>,
+
     private val onApplyClick:
     ((Hackathon) -> Unit)?
 ):
@@ -67,11 +70,34 @@ class HackathonAdapter(
             holder.binding.btnApply.visibility =
                 android.view.View.VISIBLE
 
-            holder.binding.btnApply
-                .setOnClickListener {
+            if (
+                appliedHackathons.contains(
+                    hackathon.title
+                )
+            ) {
 
-                    onApplyClick.invoke(hackathon)
-                }
+                holder.binding.btnApply.text =
+                    "Applied"
+
+                holder.binding.btnApply
+                    .isEnabled = false
+
+            } else {
+
+                holder.binding.btnApply.text =
+                    "Apply Now"
+
+                holder.binding.btnApply
+                    .isEnabled = true
+
+                holder.binding.btnApply
+                    .setOnClickListener {
+
+                        onApplyClick.invoke(
+                            hackathon
+                        )
+                    }
+            }
 
         } else {
 
