@@ -90,29 +90,8 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupHackathons() {
 
-        val hackathonList = listOf(
-
-            Hackathon(
-                "AI Hackathon 2026",
-                "₹50,000",
-                "2-4",
-                "May 25"
-            ),
-
-            Hackathon(
-                "Web3 Buildathon",
-                "₹1,00,000",
-                "1-3",
-                "June 2"
-            ),
-
-            Hackathon(
-                "Open Source Sprint",
-                "₹25,000",
-                "2-5",
-                "May 30"
-            )
-        )
+        val hackathonList =
+            mutableListOf<Hackathon>()
 
         val adapter =
             HackathonAdapter(
@@ -127,6 +106,26 @@ class MainActivity : AppCompatActivity() {
 
         binding.recyclerHackathons.adapter =
             adapter
+
+        firestore.collection("hackathons")
+            .get()
+
+            .addOnSuccessListener { result ->
+
+                hackathonList.clear()
+
+                for (document in result) {
+
+                    val hackathon =
+                        document.toObject(
+                            Hackathon::class.java
+                        )
+
+                    hackathonList.add(hackathon)
+                }
+
+                adapter.notifyDataSetChanged()
+            }
     }
 
     private fun applyToHackathon(

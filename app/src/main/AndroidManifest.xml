@@ -40,6 +40,11 @@
 
             android:exported="false" />
         <activity
+            android:name=
+                ".ui.dashboard.AddHackathonActivity"
+
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true" />
     </application>

@@ -148,6 +148,25 @@
 
                 android:layout_marginTop="28dp" />
 
+            <Button
+                android:id="@+id/btnProfile"
+
+                android:layout_width="match_parent"
+
+                android:layout_height="56dp"
+
+                android:text="Profile"
+
+                android:textStyle="bold"
+
+                android:textSize="16sp"
+
+                android:textColor="@color/white"
+
+                android:backgroundTint="@color/grape_primary"
+
+                android:layout_marginTop="14dp" />
+
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>

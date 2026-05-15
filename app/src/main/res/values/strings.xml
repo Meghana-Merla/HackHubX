@@ -1,3 +1,17 @@
 <resources>
-    <string name="app_name">HackHubX</string>
+
+    <string name="app_name">
+        HackHubX
+    </string>
+
+    <string-array name="currency_array">
+
+        <item>INR ₹</item>
+
+        <item>USD $</item>
+
+        <item>EUR €</item>
+
+    </string-array>
+
 </resources>
