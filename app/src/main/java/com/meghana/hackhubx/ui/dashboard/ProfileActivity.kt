@@ -94,10 +94,10 @@ class ProfileActivity : AppCompatActivity() {
                     user?.email
 
                 binding.tvBio.text =
-                    "Bio: ${user?.bio}"
+                    user?.bio
 
                 binding.tvSkills.text =
-                    "Skills: ${user?.skills}"
+                    user?.skills
 
                 binding.tvBranch.text =
                     "Branch: ${user?.branch}"
@@ -106,10 +106,10 @@ class ProfileActivity : AppCompatActivity() {
                     "Year: ${user?.year}"
 
                 binding.tvGithub.text =
-                    "GitHub: ${user?.github}"
+                    user?.github
 
                 binding.tvLinkedin.text =
-                    "LinkedIn: ${user?.linkedin}"
+                    user?.linkedin
 
                 Glide.with(this)
 

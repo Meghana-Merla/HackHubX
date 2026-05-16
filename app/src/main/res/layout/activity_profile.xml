@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<androidx.constraintlayout.widget.ConstraintLayout
+<androidx.core.widget.NestedScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
 
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -9,299 +9,394 @@
 
     android:layout_height="match_parent"
 
-    android:background="@color/background_white">
+    android:background="@color/background_white"
 
-    <!-- Top Section -->
+    android:fillViewport="true">
 
-    <View
-        android:id="@+id/topSection"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
 
-        android:layout_width="0dp"
+        android:layout_height="wrap_content">
 
-        android:layout_height="220dp"
+        <!-- Purple Top -->
 
-        android:background="@drawable/grape_gradient"
+        <View
+            android:id="@+id/topSection"
 
-        app:layout_constraintTop_toTopOf="parent"
+            android:layout_width="0dp"
 
-        app:layout_constraintStart_toStartOf="parent"
+            android:layout_height="240dp"
 
-        app:layout_constraintEnd_toEndOf="parent" />
+            android:background="@drawable/grape_gradient"
 
-    <!-- Title -->
+            app:layout_constraintTop_toTopOf="parent"
 
-    <TextView
-        android:id="@+id/tvProfile"
+            app:layout_constraintStart_toStartOf="parent"
 
-        android:layout_width="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent" />
 
-        android:layout_height="wrap_content"
+        <!-- Title -->
 
-        android:text="Profile"
+        <TextView
+            android:id="@+id/tvProfileTitle"
 
-        android:textColor="@color/white"
-
-        android:textStyle="bold"
-
-        android:textSize="34sp"
-
-        android:layout_marginTop="70dp"
-
-        app:layout_constraintTop_toTopOf="parent"
-
-        app:layout_constraintStart_toStartOf="parent"
-
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <TextView
-        android:id="@+id/tvSubtitle"
-
-        android:layout_width="wrap_content"
-
-        android:layout_height="wrap_content"
-
-        android:text="Your developer profile"
-
-        android:textColor="@color/white"
-
-        android:textSize="16sp"
-
-        android:alpha="0.9"
-
-        android:layout_marginTop="8dp"
-
-        app:layout_constraintTop_toBottomOf="@id/tvProfile"
-
-        app:layout_constraintStart_toStartOf="parent"
-
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <!-- Profile Card -->
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/profileCard"
-
-        android:layout_width="0dp"
-
-        android:layout_height="wrap_content"
-
-        android:layout_marginStart="24dp"
-
-        android:layout_marginEnd="24dp"
-
-        android:layout_marginTop="170dp"
-
-        app:cardCornerRadius="28dp"
-
-        app:cardElevation="14dp"
-
-        app:cardBackgroundColor="@color/white"
-
-        app:layout_constraintTop_toTopOf="parent"
-
-        app:layout_constraintStart_toStartOf="parent"
-
-        app:layout_constraintEnd_toEndOf="parent">
-
-        <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
 
             android:layout_height="wrap_content"
 
-            android:orientation="vertical"
+            android:text="Profile"
 
-            android:padding="28dp">
+            android:textColor="@color/white"
 
-            <TextView
-                android:id="@+id/tvName"
+            android:textSize="34sp"
 
-                android:layout_width="wrap_content"
+            android:textStyle="bold"
 
-                android:layout_height="wrap_content"
+            android:layout_marginTop="56dp"
 
-                android:text="Name"
+            app:layout_constraintTop_toTopOf="parent"
 
-                android:textSize="24sp"
+            app:layout_constraintStart_toStartOf="parent"
 
-                android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent" />
 
-                android:textColor="@color/text_dark" />
+        <!-- Subtitle -->
 
-            <TextView
-                android:id="@+id/tvCollege"
+        <TextView
+            android:id="@+id/tvSubtitle"
 
-                android:layout_width="wrap_content"
+            android:layout_width="wrap_content"
 
-                android:layout_height="wrap_content"
+            android:layout_height="wrap_content"
 
-                android:text="College"
+            android:text="Manage your HackHubX identity"
 
-                android:textSize="18sp"
+            android:textColor="@color/white"
 
-                android:textColor="@color/text_dark"
+            android:textSize="16sp"
 
-                android:layout_marginTop="14dp" />
+            android:alpha="0.9"
 
-            <TextView
-                android:id="@+id/tvEmail"
+            android:layout_marginTop="8dp"
 
-                android:layout_width="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/tvProfileTitle"
 
-                android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
 
-                android:text="Email"
+            app:layout_constraintEnd_toEndOf="parent" />
 
-                android:textSize="18sp"
+        <!-- Card -->
 
-                android:textColor="@color/text_dark"
+        <androidx.cardview.widget.CardView
+            android:layout_width="0dp"
 
-                android:layout_marginTop="14dp" />
+            android:layout_height="wrap_content"
 
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/imgProfile"
+            android:layout_marginStart="20dp"
 
-                android:layout_width="120dp"
+            android:layout_marginEnd="20dp"
 
-                android:layout_height="120dp"
+            android:layout_marginTop="160dp"
 
-                android:layout_gravity="center"
+            android:layout_marginBottom="24dp"
 
-                android:layout_marginTop="24dp"
+            app:cardCornerRadius="28dp"
 
-                android:scaleType="centerCrop"
+            app:cardElevation="10dp"
 
-                android:src="@mipmap/ic_launcher"
+            app:cardBackgroundColor="@color/white"
 
-                android:background="@drawable/bg_profile_circle" />
+            app:layout_constraintTop_toTopOf="parent"
 
-            <TextView
-                android:id="@+id/tvBio"
+            app:layout_constraintStart_toStartOf="parent"
 
+            app:layout_constraintEnd_toEndOf="parent"
+
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <LinearLayout
                 android:layout_width="match_parent"
 
                 android:layout_height="wrap_content"
 
-                android:text="Bio"
+                android:orientation="vertical"
 
-                android:textSize="16sp"
+                android:padding="24dp">
 
-                android:textColor="@color/text_dark"
+                <!-- Profile Image -->
 
-                android:layout_marginTop="20dp" />
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/imgProfile"
 
-            <TextView
-                android:id="@+id/tvSkills"
+                    android:layout_width="110dp"
 
-                android:layout_width="match_parent"
+                    android:layout_height="110dp"
 
-                android:layout_height="wrap_content"
+                    android:layout_gravity="center"
 
-                android:text="Skills"
+                    android:src="@android:drawable/sym_def_app_icon"
 
-                android:textSize="16sp"
+                    android:scaleType="centerCrop" />
 
-                android:textColor="@color/text_dark"
+                <!-- Name -->
 
-                android:layout_marginTop="12dp" />
+                <TextView
+                    android:id="@+id/tvName"
 
-            <TextView
-                android:id="@+id/tvBranch"
+                    android:layout_width="wrap_content"
 
-                android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
 
-                android:layout_height="wrap_content"
+                    android:layout_gravity="center"
 
-                android:text="Branch"
+                    android:layout_marginTop="18dp"
 
-                android:textSize="16sp"
+                    android:text="Meghana"
 
-                android:textColor="@color/text_dark"
+                    android:textSize="28sp"
 
-                android:layout_marginTop="12dp" />
+                    android:textStyle="bold"
 
-            <TextView
-                android:id="@+id/tvYear"
+                    android:textColor="@color/text_dark" />
 
-                android:layout_width="match_parent"
+                <!-- College -->
 
-                android:layout_height="wrap_content"
+                <TextView
+                    android:id="@+id/tvCollege"
 
-                android:text="Year"
+                    android:layout_width="wrap_content"
 
-                android:textSize="16sp"
+                    android:layout_height="wrap_content"
 
-                android:textColor="@color/text_dark"
+                    android:layout_gravity="center"
 
-                android:layout_marginTop="12dp" />
+                    android:layout_marginTop="6dp"
 
-            <TextView
-                android:id="@+id/tvGithub"
+                    android:text="KL University"
 
-                android:layout_width="match_parent"
+                    android:textSize="16sp"
 
-                android:layout_height="wrap_content"
+                    android:textColor="#808080" />
 
-                android:text="GitHub"
+                <!-- Email -->
 
-                android:textSize="16sp"
+                <TextView
+                    android:id="@+id/tvEmail"
 
-                android:textColor="@color/grape_primary"
+                    android:layout_width="wrap_content"
 
-                android:layout_marginTop="12dp" />
+                    android:layout_height="wrap_content"
 
-            <TextView
-                android:id="@+id/tvLinkedin"
+                    android:layout_gravity="center"
 
-                android:layout_width="match_parent"
+                    android:layout_marginTop="4dp"
 
-                android:layout_height="wrap_content"
+                    android:text="example@gmail.com"
 
-                android:text="LinkedIn"
+                    android:textSize="15sp"
 
-                android:textSize="16sp"
+                    android:textColor="#808080" />
 
-                android:textColor="@color/grape_primary"
+                <!-- About -->
 
-                android:layout_marginTop="12dp" />
+                <TextView
+                    android:layout_width="wrap_content"
 
-            <Button
-                android:id="@+id/btnEditProfile"
+                    android:layout_height="wrap_content"
 
-                android:layout_width="match_parent"
+                    android:text="About"
 
-                android:layout_height="56dp"
+                    android:textSize="20sp"
 
-                android:text="Edit Profile"
+                    android:textStyle="bold"
 
-                android:textStyle="bold"
+                    android:textColor="@color/text_dark"
 
-                android:textColor="@color/white"
+                    android:layout_marginTop="28dp" />
 
-                android:backgroundTint="@color/grape_primary"
+                <TextView
+                    android:id="@+id/tvBio"
 
-                android:layout_marginTop="24dp" />
+                    android:layout_width="match_parent"
 
-            <Button
-                android:id="@+id/btnLogout"
+                    android:layout_height="wrap_content"
 
-                android:layout_width="match_parent"
+                    android:layout_marginTop="10dp"
 
-                android:layout_height="56dp"
+                    android:text="Bio"
 
-                android:text="Logout"
+                    android:textSize="16sp"
 
-                android:textStyle="bold"
+                    android:textColor="@color/text_dark"
 
-                android:textSize="16sp"
+                    android:lineSpacingExtra="4dp" />
 
-                android:textColor="@color/white"
+                <!-- Skills -->
 
-                android:backgroundTint="@color/grape_primary"
+                <TextView
+                    android:layout_width="wrap_content"
 
-                android:layout_marginTop="28dp" />
+                    android:layout_height="wrap_content"
 
-        </LinearLayout>
+                    android:text="Skills"
 
-    </androidx.cardview.widget.CardView>
+                    android:textSize="20sp"
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+                    android:textStyle="bold"
+
+                    android:textColor="@color/text_dark"
+
+                    android:layout_marginTop="24dp" />
+
+                <TextView
+                    android:id="@+id/tvSkills"
+
+                    android:layout_width="match_parent"
+
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginTop="10dp"
+
+                    android:text="Skills"
+
+                    android:textSize="16sp"
+
+                    android:textColor="@color/text_dark" />
+
+                <!-- Academic Info -->
+
+                <TextView
+                    android:layout_width="wrap_content"
+
+                    android:layout_height="wrap_content"
+
+                    android:text="Academic Info"
+
+                    android:textSize="20sp"
+
+                    android:textStyle="bold"
+
+                    android:textColor="@color/text_dark"
+
+                    android:layout_marginTop="24dp" />
+
+                <TextView
+                    android:id="@+id/tvBranch"
+
+                    android:layout_width="match_parent"
+
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginTop="10dp"
+
+                    android:text="Branch"
+
+                    android:textSize="16sp"
+
+                    android:textColor="@color/text_dark" />
+
+                <TextView
+                    android:id="@+id/tvYear"
+
+                    android:layout_width="match_parent"
+
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginTop="6dp"
+
+                    android:text="Year"
+
+                    android:textSize="16sp"
+
+                    android:textColor="@color/text_dark" />
+
+                <!-- Links -->
+
+                <TextView
+                    android:layout_width="wrap_content"
+
+                    android:layout_height="wrap_content"
+
+                    android:text="Links"
+
+                    android:textSize="20sp"
+
+                    android:textStyle="bold"
+
+                    android:textColor="@color/text_dark"
+
+                    android:layout_marginTop="24dp" />
+
+                <TextView
+                    android:id="@+id/tvGithub"
+
+                    android:layout_width="match_parent"
+
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginTop="10dp"
+
+                    android:text="GitHub"
+
+                    android:textSize="16sp"
+
+                    android:textColor="@color/grape_primary" />
+
+                <TextView
+                    android:id="@+id/tvLinkedin"
+
+                    android:layout_width="match_parent"
+
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginTop="8dp"
+
+                    android:text="LinkedIn"
+
+                    android:textSize="16sp"
+
+                    android:textColor="@color/grape_primary" />
+
+                <!-- Buttons -->
+
+                <Button
+                    android:id="@+id/btnEditProfile"
+
+                    android:layout_width="match_parent"
+
+                    android:layout_height="56dp"
+
+                    android:layout_marginTop="30dp"
+
+                    android:backgroundTint="@color/grape_primary"
+
+                    android:text="Edit Profile"
+
+                    android:textColor="@color/white"
+
+                    android:textStyle="bold" />
+
+                <Button
+                    android:id="@+id/btnLogout"
+
+                    android:layout_width="match_parent"
+
+                    android:layout_height="56dp"
+
+                    android:layout_marginTop="14dp"
+
+                    android:backgroundTint="#E53935"
+
+                    android:text="Logout"
+
+                    android:textColor="@color/white"
+
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.core.widget.NestedScrollView>

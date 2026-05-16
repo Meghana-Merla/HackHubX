@@ -64,6 +64,11 @@ class EditProfileActivity
 
         binding.etYear.setAdapter(adapter)
 
+        binding.etYear.setOnClickListener {
+
+            binding.etYear.showDropDown()
+        }
+
         binding.btnSaveProfile
             .setOnClickListener {
 

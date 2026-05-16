@@ -288,12 +288,21 @@
 
                     android:background="@drawable/bg_edit_text"
 
-                    android:hint="Year *"
+                    android:hint="Select Year"
 
                     android:paddingHorizontal="16dp"
 
-                    android:textColor="@color/text_dark" />
+                    android:textColor="@color/text_dark"
 
+                    android:textColorHint="#808080"
+
+                    android:drawableEnd="@android:drawable/arrow_down_float"
+
+                    android:clickable="true"
+
+                    android:focusable="false"
+
+                    android:cursorVisible="false" />
                 <!-- GitHub -->
 
                 <EditText
