@@ -13,6 +13,7 @@ import com.meghana.hackhubx.databinding.ActivityMainBinding
 import com.meghana.hackhubx.model.Hackathon
 import com.meghana.hackhubx.model.User
 import com.meghana.hackhubx.ui.dashboard.ApplicationsActivity
+import android.view.View
 import com.meghana.hackhubx.ui.dashboard.ProfileActivity
 
 class MainActivity : AppCompatActivity() {
@@ -210,6 +211,17 @@ class MainActivity : AppCompatActivity() {
                     ignoreCase = true
                 )
             }
+
+        if (filteredList.isEmpty()) {
+
+            binding.tvSearchEmptyState.visibility =
+                View.VISIBLE
+
+        } else {
+
+            binding.tvSearchEmptyState.visibility =
+                View.GONE
+        }
 
         val adapter =
 

@@ -232,6 +232,20 @@ class OrganizerDashboardActivity
                 )
             }
 
+        if (filteredList.isEmpty()) {
+
+            binding.tvEmptyState.visibility =
+                View.VISIBLE
+
+            binding.tvEmptyState.text =
+                "No hackathons found 🔍\nTry another keyword."
+
+        } else {
+
+            binding.tvEmptyState.visibility =
+                View.GONE
+        }
+
         val adapter =
 
             HackathonAdapter(
