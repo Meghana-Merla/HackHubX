@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<androidx.constraintlayout.widget.ConstraintLayout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
 
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -9,406 +9,453 @@
 
     android:layout_height="match_parent"
 
+    android:fillViewport="true"
+
     android:background="@color/background_white">
 
-    <!-- Gradient Top Section -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
 
-    <View
-        android:id="@+id/topSection"
+        android:layout_height="wrap_content">
 
-        android:layout_width="0dp"
+        <!-- Gradient Top Section -->
 
-        android:layout_height="320dp"
+        <View
+            android:id="@+id/topSection"
 
-        android:background="@drawable/grape_gradient"
+            android:layout_width="0dp"
 
-        app:layout_constraintTop_toTopOf="parent"
+            android:layout_height="320dp"
 
-        app:layout_constraintStart_toStartOf="parent"
+            android:background="@drawable/grape_gradient"
 
-        app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
 
-    <!-- App Name -->
+            app:layout_constraintStart_toStartOf="parent"
 
-    <TextView
-        android:id="@+id/tvAppName"
+            app:layout_constraintEnd_toEndOf="parent" />
 
-        android:layout_width="wrap_content"
+        <!-- App Name -->
 
-        android:layout_height="wrap_content"
+        <TextView
+            android:id="@+id/tvAppName"
 
-        android:text="HackHubX"
-
-        android:textColor="@color/white"
-
-        android:textStyle="bold"
-
-        android:textSize="18sp"
-
-        android:layout_marginTop="40dp"
-
-        android:alpha="0.9"
-
-        app:layout_constraintTop_toTopOf="parent"
-
-        app:layout_constraintStart_toStartOf="parent"
-
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <!-- Title -->
-
-    <TextView
-        android:id="@+id/tvTitle"
-
-        android:layout_width="wrap_content"
-
-        android:layout_height="wrap_content"
-
-        android:text="Create Account"
-
-        android:textColor="@color/white"
-
-        android:textStyle="bold"
-
-        android:textSize="32sp"
-
-        android:layout_marginTop="90dp"
-
-        app:layout_constraintTop_toTopOf="parent"
-
-        app:layout_constraintStart_toStartOf="parent"
-
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <!-- Subtitle -->
-
-    <TextView
-        android:id="@+id/tvSubtitle"
-
-        android:layout_width="wrap_content"
-
-        android:layout_height="wrap_content"
-
-        android:text="Register to join hackathons"
-
-        android:textColor="@color/white"
-
-        android:textSize="16sp"
-
-        android:alpha="0.85"
-
-        android:layout_marginTop="8dp"
-
-        app:layout_constraintTop_toBottomOf="@id/tvTitle"
-
-        app:layout_constraintStart_toStartOf="parent"
-
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <!-- Register Card -->
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/registerCard"
-
-        android:layout_width="0dp"
-
-        android:layout_height="wrap_content"
-
-        android:layout_marginStart="24dp"
-
-        android:layout_marginEnd="24dp"
-
-        android:layout_marginTop="220dp"
-
-        app:cardCornerRadius="28dp"
-
-        app:cardElevation="14dp"
-
-        app:layout_constraintTop_toTopOf="parent"
-
-        app:layout_constraintStart_toStartOf="parent"
-
-        app:layout_constraintEnd_toEndOf="parent">
-
-        <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
 
             android:layout_height="wrap_content"
 
-            android:orientation="vertical"
+            android:text="HackHubX"
 
-            android:padding="28dp">
+            android:textColor="@color/white"
 
-            <!-- Full Name -->
+            android:textStyle="bold"
 
-            <com.google.android.material.textfield.TextInputLayout
+            android:textSize="18sp"
+
+            android:layout_marginTop="40dp"
+
+            android:alpha="0.9"
+
+            app:layout_constraintTop_toTopOf="parent"
+
+            app:layout_constraintStart_toStartOf="parent"
+
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <!-- Title -->
+
+        <TextView
+            android:id="@+id/tvTitle"
+
+            android:layout_width="wrap_content"
+
+            android:layout_height="wrap_content"
+
+            android:text="Create Account"
+
+            android:textColor="@color/white"
+
+            android:textStyle="bold"
+
+            android:textSize="32sp"
+
+            android:layout_marginTop="90dp"
+
+            app:layout_constraintTop_toTopOf="parent"
+
+            app:layout_constraintStart_toStartOf="parent"
+
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <!-- Subtitle -->
+
+        <TextView
+            android:id="@+id/tvSubtitle"
+
+            android:layout_width="wrap_content"
+
+            android:layout_height="wrap_content"
+
+            android:text="Register to join hackathons"
+
+            android:textColor="@color/white"
+
+            android:textSize="16sp"
+
+            android:alpha="0.85"
+
+            android:layout_marginTop="8dp"
+
+            app:layout_constraintTop_toBottomOf="@id/tvTitle"
+
+            app:layout_constraintStart_toStartOf="parent"
+
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <!-- Register Card -->
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/registerCard"
+
+            android:layout_width="0dp"
+
+            android:layout_height="wrap_content"
+
+            android:layout_marginStart="24dp"
+
+            android:layout_marginEnd="24dp"
+
+            android:layout_marginTop="170dp"
+
+            android:layout_marginBottom="24dp"
+
+            app:cardCornerRadius="28dp"
+
+            app:cardElevation="14dp"
+
+            app:layout_constraintTop_toTopOf="parent"
+
+            app:layout_constraintStart_toStartOf="parent"
+
+            app:layout_constraintEnd_toEndOf="parent"
+
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <LinearLayout
                 android:layout_width="match_parent"
 
                 android:layout_height="wrap_content"
 
-                android:hint="Full Name"
+                android:orientation="vertical"
 
-                app:boxBackgroundMode="outline"
+                android:padding="28dp">
 
-                app:boxCornerRadiusTopStart="16dp"
+                <!-- Full Name -->
 
-                app:boxCornerRadiusTopEnd="16dp"
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
 
-                app:boxCornerRadiusBottomStart="16dp"
+                    android:layout_height="wrap_content"
 
-                app:boxCornerRadiusBottomEnd="16dp">
+                    android:hint="Full Name"
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etName"
+                    app:boxBackgroundMode="outline"
+
+                    app:boxCornerRadiusTopStart="16dp"
+
+                    app:boxCornerRadiusTopEnd="16dp"
+
+                    app:boxCornerRadiusBottomStart="16dp"
+
+                    app:boxCornerRadiusBottomEnd="16dp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etName"
+
+                        android:layout_width="match_parent"
+
+                        android:layout_height="wrap_content"
+
+                        android:inputType="textPersonName" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- College -->
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginTop="18dp"
+
+                    android:hint="College Name"
+
+                    app:boxBackgroundMode="outline"
+
+                    app:boxCornerRadiusTopStart="16dp"
+
+                    app:boxCornerRadiusTopEnd="16dp"
+
+                    app:boxCornerRadiusBottomStart="16dp"
+
+                    app:boxCornerRadiusBottomEnd="16dp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etCollege"
+
+                        android:layout_width="match_parent"
+
+                        android:layout_height="wrap_content"
+
+                        android:inputType="text" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- Branch -->
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginTop="18dp"
+
+                    android:hint="Branch"
+
+                    app:boxBackgroundMode="outline"
+
+                    app:boxCornerRadiusTopStart="16dp"
+
+                    app:boxCornerRadiusTopEnd="16dp"
+
+                    app:boxCornerRadiusBottomStart="16dp"
+
+                    app:boxCornerRadiusBottomEnd="16dp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etBranch"
+
+                        android:layout_width="match_parent"
+
+                        android:layout_height="wrap_content"
+
+                        android:inputType="text" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- Year -->
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginTop="18dp"
+
+                    android:hint="Year"
+
+                    app:endIconMode="dropdown_menu"
+
+                    app:boxBackgroundMode="outline"
+
+                    app:boxCornerRadiusTopStart="16dp"
+
+                    app:boxCornerRadiusTopEnd="16dp"
+
+                    app:boxCornerRadiusBottomStart="16dp"
+
+                    app:boxCornerRadiusBottomEnd="16dp">
+
+                    <AutoCompleteTextView
+                        android:id="@+id/etYear"
+
+                        android:layout_width="match_parent"
+
+                        android:layout_height="56dp"
+
+                        android:gravity="center_vertical"
+
+                        android:paddingStart="14dp"
+
+                        android:textSize="16sp"
+
+                        android:textColor="@color/text_dark"
+
+                        android:focusable="false"
+
+                        android:cursorVisible="false" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- Email -->
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginTop="18dp"
+
+                    android:hint="Email"
+
+                    app:boxBackgroundMode="outline"
+
+                    app:boxCornerRadiusTopStart="16dp"
+
+                    app:boxCornerRadiusTopEnd="16dp"
+
+                    app:boxCornerRadiusBottomStart="16dp"
+
+                    app:boxCornerRadiusBottomEnd="16dp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etEmail"
+
+                        android:layout_width="match_parent"
+
+                        android:layout_height="wrap_content"
+
+                        android:inputType="textEmailAddress" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- Password -->
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginTop="18dp"
+
+                    android:hint="Password"
+
+                    app:boxBackgroundMode="outline"
+
+                    app:endIconMode="password_toggle"
+
+                    app:boxCornerRadiusTopStart="16dp"
+
+                    app:boxCornerRadiusTopEnd="16dp"
+
+                    app:boxCornerRadiusBottomStart="16dp"
+
+                    app:boxCornerRadiusBottomEnd="16dp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etPassword"
+
+                        android:layout_width="match_parent"
+
+                        android:layout_height="wrap_content"
+
+                        android:inputType="textPassword" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- Confirm Password -->
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginTop="18dp"
+
+                    android:hint="Confirm Password"
+
+                    app:boxBackgroundMode="outline"
+
+                    app:endIconMode="password_toggle"
+
+                    app:boxCornerRadiusTopStart="16dp"
+
+                    app:boxCornerRadiusTopEnd="16dp"
+
+                    app:boxCornerRadiusBottomStart="16dp"
+
+                    app:boxCornerRadiusBottomEnd="16dp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etConfirmPassword"
+
+                        android:layout_width="match_parent"
+
+                        android:layout_height="wrap_content"
+
+                        android:inputType="textPassword" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- Role Selection -->
+
+                <RadioGroup
+                    android:id="@+id/radioGroupRole"
 
                     android:layout_width="match_parent"
 
                     android:layout_height="wrap_content"
 
-                    android:inputType="textPersonName" />
+                    android:layout_marginTop="20dp"
 
-            </com.google.android.material.textfield.TextInputLayout>
+                    android:orientation="horizontal">
 
-            <!-- College -->
+                    <RadioButton
+                        android:id="@+id/radioCandidate"
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
 
-                android:layout_height="wrap_content"
+                        android:layout_height="wrap_content"
 
-                android:layout_marginTop="18dp"
+                        android:text="Candidate"
 
-                android:hint="College Name"
+                        android:textColor="@color/text_dark"
 
-                app:boxBackgroundMode="outline"
+                        android:textStyle="bold" />
 
-                app:boxCornerRadiusTopStart="16dp"
+                    <RadioButton
+                        android:id="@+id/radioOrganizer"
 
-                app:boxCornerRadiusTopEnd="16dp"
+                        android:layout_width="wrap_content"
 
-                app:boxCornerRadiusBottomStart="16dp"
+                        android:layout_height="wrap_content"
 
-                app:boxCornerRadiusBottomEnd="16dp">
+                        android:text="Organizer"
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etCollege"
+                        android:textColor="@color/text_dark"
 
-                    android:layout_width="match_parent"
+                        android:textStyle="bold"
 
-                    android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp" />
 
-                    android:inputType="text" />
+                </RadioGroup>
 
-            </com.google.android.material.textfield.TextInputLayout>
+                <!-- Register Button -->
 
-            <EditText
-                android:id="@+id/etBranch"
-
-                android:layout_width="match_parent"
-
-                android:layout_height="50dp"
-
-                android:layout_marginTop="14dp"
-
-                android:background="@drawable/bg_edit_text"
-
-                android:hint="Branch"
-
-                android:paddingHorizontal="16dp"
-
-                android:textColor="@color/text_dark" />
-
-            <AutoCompleteTextView
-                android:id="@+id/etYear"
-
-                android:layout_width="match_parent"
-
-                android:layout_height="50dp"
-
-                android:layout_marginTop="14dp"
-
-                android:background="@drawable/bg_edit_text"
-
-                android:hint="Select Year"
-
-                android:paddingHorizontal="16dp"
-
-                android:textColor="@color/text_dark"
-
-                android:textColorHint="#808080"
-
-                android:drawableEnd="@android:drawable/arrow_down_float"
-
-                android:clickable="true"
-
-                android:focusable="false"
-
-                android:cursorVisible="false" />
-
-            <!-- Email -->
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-
-                android:layout_height="wrap_content"
-
-                android:layout_marginTop="18dp"
-
-                android:hint="Email"
-
-                app:boxBackgroundMode="outline"
-
-                app:boxCornerRadiusTopStart="16dp"
-
-                app:boxCornerRadiusTopEnd="16dp"
-
-                app:boxCornerRadiusBottomStart="16dp"
-
-                app:boxCornerRadiusBottomEnd="16dp">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etEmail"
+                <Button
+                    android:id="@+id/btnRegister"
 
                     android:layout_width="match_parent"
 
-                    android:layout_height="wrap_content"
+                    android:layout_height="56dp"
 
-                    android:inputType="textEmailAddress" />
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <!-- Password -->
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-
-                android:layout_height="wrap_content"
-
-                android:layout_marginTop="18dp"
-
-                android:hint="Password"
-
-                app:boxBackgroundMode="outline"
-
-                app:endIconMode="password_toggle"
-
-                app:boxCornerRadiusTopStart="16dp"
-
-                app:boxCornerRadiusTopEnd="16dp"
-
-                app:boxCornerRadiusBottomStart="16dp"
-
-                app:boxCornerRadiusBottomEnd="16dp">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etPassword"
-
-                    android:layout_width="match_parent"
-
-                    android:layout_height="wrap_content"
-
-                    android:inputType="textPassword" />
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <!-- Confirm Password -->
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-
-                android:layout_height="wrap_content"
-
-                android:layout_marginTop="18dp"
-
-                android:hint="Confirm Password"
-
-                app:boxBackgroundMode="outline"
-
-                app:endIconMode="password_toggle"
-
-                app:boxCornerRadiusTopStart="16dp"
-
-                app:boxCornerRadiusTopEnd="16dp"
-
-                app:boxCornerRadiusBottomStart="16dp"
-
-                app:boxCornerRadiusBottomEnd="16dp">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etConfirmPassword"
-
-                    android:layout_width="match_parent"
-
-                    android:layout_height="wrap_content"
-
-                    android:inputType="textPassword" />
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <RadioGroup
-                android:id="@+id/radioGroupRole"
-
-                android:layout_width="match_parent"
-
-                android:layout_height="wrap_content"
-
-                android:layout_marginTop="20dp"
-
-                android:orientation="horizontal">
-
-                <RadioButton
-                    android:id="@+id/radioCandidate"
-
-                    android:layout_width="wrap_content"
-
-                    android:layout_height="wrap_content"
-
-                    android:text="Candidate"
-
-                    android:textColor="@color/text_dark"
-
-                    android:textStyle="bold" />
-
-                <RadioButton
-                    android:id="@+id/radioOrganizer"
-
-                    android:layout_width="wrap_content"
-
-                    android:layout_height="wrap_content"
-
-                    android:text="Organizer"
-
-                    android:textColor="@color/text_dark"
+                    android:text="Register"
 
                     android:textStyle="bold"
 
-                    android:layout_marginStart="20dp" />
+                    android:textSize="16sp"
 
-            </RadioGroup>
+                    android:textColor="@color/white"
 
-            <!-- Register Button -->
+                    android:backgroundTint="@color/grape_primary"
 
-            <Button
-                android:id="@+id/btnRegister"
+                    android:layout_marginTop="14dp" />
 
-                android:layout_width="match_parent"
+            </LinearLayout>
 
-                android:layout_height="56dp"
+        </androidx.cardview.widget.CardView>
 
-                android:text="Register"
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-                android:textStyle="bold"
-
-                android:textSize="16sp"
-
-                android:textColor="@color/white"
-
-                android:backgroundTint="@color/grape_primary"
-
-                android:layout_marginTop="28dp" />
-
-        </LinearLayout>
-
-    </androidx.cardview.widget.CardView>
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
