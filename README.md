@@ -140,12 +140,49 @@ git clone <your-repository-link>
 
 ---
 
+# 📂 Project Structure
+
+```text
+HackHubX/
+│
+├── app/
+│   ├── adapter/
+│   ├── model/
+│   ├── ui/
+│   │   ├── auth/
+│   │   ├── dashboard/
+│   │   └── organizer/
+│   ├── res/
+│   │   ├── drawable/
+│   │   ├── layout/
+│   │   └── values/
+│   └── MainActivity.kt
+│
+├── screenshots/
+├── README.md
+└── build.gradle
+```
+
+---
+
 # 📌 Future Improvements
 
 - Push notifications
 - Dark mode
 - Bookmark hackathons
 - Advanced filtering
+
+---
+
+# 📚 What I Learned
+
+- Building scalable Android applications using Kotlin and XML
+- Firebase Authentication and Firestore integration
+- Real-time database synchronization
+- RecyclerView and adapter-based UI architecture
+- Role-based app flow design for students and organizers
+- UI/UX consistency and responsive mobile layouts
+- Git and GitHub workflow management
 
 ---
 
