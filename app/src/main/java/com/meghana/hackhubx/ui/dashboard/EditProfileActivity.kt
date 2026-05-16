@@ -7,6 +7,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.meghana.hackhubx.databinding.ActivityEditProfileBinding
 import com.bumptech.glide.Glide
+import com.meghana.hackhubx.R
 
 class EditProfileActivity
     : AppCompatActivity() {
@@ -165,6 +166,14 @@ class EditProfileActivity
                 Glide.with(this)
 
                     .load(imageUrl)
+
+                    .placeholder(
+                        R.drawable.default_profile
+                    )
+
+                    .error(
+                        R.drawable.default_profile
+                    )
 
                     .into(binding.imgProfilePreview)
             }

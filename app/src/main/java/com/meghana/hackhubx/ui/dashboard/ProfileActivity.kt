@@ -10,6 +10,7 @@ import com.meghana.hackhubx.databinding.ActivityProfileBinding
 import com.meghana.hackhubx.model.User
 import com.meghana.hackhubx.ui.auth.LoginActivity
 import android.net.Uri
+import com.meghana.hackhubx.R
 
 class ProfileActivity : AppCompatActivity() {
 
@@ -192,8 +193,14 @@ class ProfileActivity : AppCompatActivity() {
 
                 Glide.with(this)
 
-                    .load(
-                        user?.profileImageUrl
+                    .load(user?.profileImageUrl)
+
+                    .placeholder(
+                        R.drawable.default_profile
+                    )
+
+                    .error(
+                        R.drawable.default_profile
                     )
 
                     .into(binding.imgProfile)
