@@ -201,6 +201,50 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
+            <EditText
+                android:id="@+id/etBranch"
+
+                android:layout_width="match_parent"
+
+                android:layout_height="50dp"
+
+                android:layout_marginTop="14dp"
+
+                android:background="@drawable/bg_edit_text"
+
+                android:hint="Branch"
+
+                android:paddingHorizontal="16dp"
+
+                android:textColor="@color/text_dark" />
+
+            <AutoCompleteTextView
+                android:id="@+id/etYear"
+
+                android:layout_width="match_parent"
+
+                android:layout_height="50dp"
+
+                android:layout_marginTop="14dp"
+
+                android:background="@drawable/bg_edit_text"
+
+                android:hint="Select Year"
+
+                android:paddingHorizontal="16dp"
+
+                android:textColor="@color/text_dark"
+
+                android:textColorHint="#808080"
+
+                android:drawableEnd="@android:drawable/arrow_down_float"
+
+                android:clickable="true"
+
+                android:focusable="false"
+
+                android:cursorVisible="false" />
+
             <!-- Email -->
 
             <com.google.android.material.textfield.TextInputLayout

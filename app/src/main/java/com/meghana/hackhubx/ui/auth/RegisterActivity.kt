@@ -1,6 +1,7 @@
 package com.meghana.hackhubx.ui.auth
 
 import android.os.Bundle
+import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
@@ -29,10 +30,13 @@ class RegisterActivity : AppCompatActivity() {
 
         setContentView(binding.root)
 
-        auth = FirebaseAuth.getInstance()
+        auth =
+            FirebaseAuth.getInstance()
 
         firestore =
             FirebaseFirestore.getInstance()
+
+        setupYearDropdown()
 
         binding.btnRegister.setOnClickListener {
 
@@ -43,6 +47,16 @@ class RegisterActivity : AppCompatActivity() {
 
             val college =
                 binding.etCollege.text
+                    .toString()
+                    .trim()
+
+            val branch =
+                binding.etBranch.text
+                    .toString()
+                    .trim()
+
+            val year =
+                binding.etYear.text
                     .toString()
                     .trim()
 
@@ -85,6 +99,20 @@ class RegisterActivity : AppCompatActivity() {
 
                     showToast(
                         "Enter college name"
+                    )
+                }
+
+                branch.isEmpty() -> {
+
+                    showToast(
+                        "Enter branch"
+                    )
+                }
+
+                year.isEmpty() -> {
+
+                    showToast(
+                        "Select year"
                     )
                 }
 
@@ -135,6 +163,8 @@ class RegisterActivity : AppCompatActivity() {
                     registerUser(
                         name,
                         college,
+                        branch,
+                        year,
                         email,
                         password,
                         role
@@ -144,9 +174,46 @@ class RegisterActivity : AppCompatActivity() {
         }
     }
 
+    private fun setupYearDropdown() {
+
+        val years = arrayOf(
+
+            "1st Year",
+
+            "2nd Year",
+
+            "3rd Year",
+
+            "4th Year",
+
+            "Graduated"
+        )
+
+        val adapter =
+
+            ArrayAdapter(
+
+                this,
+
+                android.R.layout
+                    .simple_dropdown_item_1line,
+
+                years
+            )
+
+        binding.etYear.setAdapter(adapter)
+
+        binding.etYear.setOnClickListener {
+
+            binding.etYear.showDropDown()
+        }
+    }
+
     private fun registerUser(
         name: String,
         college: String,
+        branch: String,
+        year: String,
         email: String,
         password: String,
         role: String
@@ -171,6 +238,10 @@ class RegisterActivity : AppCompatActivity() {
                     name = name,
 
                     college = college,
+
+                    branch = branch,
+
+                    year = year,
 
                     email = email,
 
