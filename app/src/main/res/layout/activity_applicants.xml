@@ -107,15 +107,23 @@
 
                 android:layout_height="wrap_content"
 
-                android:text="No applicants yet"
+                android:text="No applicants yet 👀\nShare your hackathon to attract participants."
+
+                android:textAlignment="center"
 
                 android:textSize="16sp"
 
-                android:textColor="@color/text_dark"
+                android:textColor="#808080"
 
                 android:visibility="gone"
 
-                android:layout_gravity="center" />
+                app:layout_constraintTop_toBottomOf="@id/recyclerApplicants"
+
+                app:layout_constraintStart_toStartOf="parent"
+
+                app:layout_constraintEnd_toEndOf="parent"
+
+                android:layout_marginTop="24dp" />
 
         </FrameLayout>
 

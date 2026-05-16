@@ -80,8 +80,12 @@ class ApplicantsActivity
 
                     binding.tvEmptyApplicants.visibility =
                         View.VISIBLE
-                }
 
+                } else {
+
+                    binding.tvEmptyApplicants.visibility =
+                        View.GONE
+                }
                 for (document in result) {
 
                     val userId =
