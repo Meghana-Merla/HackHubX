@@ -78,7 +78,9 @@ dependencies {
     implementation(
         "com.google.firebase:firebase-firestore-ktx"
     )
-
+    implementation(
+        "de.hdodenhof:circleimageview:3.1.0"
+    )
     implementation(libs.androidx.core.ktx)
 
     implementation(libs.androidx.appcompat)

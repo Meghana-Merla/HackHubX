@@ -49,6 +49,8 @@
         <activity
             android:name=".ui.dashboard.HackathonDetailsActivity" />
         <activity
+            android:name=".ui.dashboard.EditProfileActivity" />
+        <activity
             android:name=".MainActivity"
             android:exported="true" />
     </application>
