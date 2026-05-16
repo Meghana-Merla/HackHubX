@@ -95,10 +95,30 @@ class ProfileActivity : AppCompatActivity() {
                     user?.email
 
                 binding.tvBio.text =
-                    user?.bio
+
+                    if (
+                        user?.bio.isNullOrEmpty()
+                    ) {
+
+                        "No bio added yet"
+
+                    } else {
+
+                        user?.bio
+                    }
 
                 binding.tvSkills.text =
-                    user?.skills
+
+                    if (
+                        user?.skills.isNullOrEmpty()
+                    ) {
+
+                        "No skills added"
+
+                    } else {
+
+                        user?.skills
+                    }
 
                 binding.tvBranch.text =
                     "Branch: ${user?.branch}"
@@ -107,10 +127,30 @@ class ProfileActivity : AppCompatActivity() {
                     "Year: ${user?.year}"
 
                 binding.tvGithub.text =
-                    user?.github
+
+                    if (
+                        user?.github.isNullOrEmpty()
+                    ) {
+
+                        "No GitHub link added"
+
+                    } else {
+
+                        user?.github
+                    }
 
                 binding.tvLinkedin.text =
-                    user?.linkedin
+
+                    if (
+                        user?.linkedin.isNullOrEmpty()
+                    ) {
+
+                        "No LinkedIn link added"
+
+                    } else {
+
+                        user?.linkedin
+                    }
 
                 binding.tvGithub.setOnClickListener {
 
