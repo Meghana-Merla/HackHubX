@@ -9,6 +9,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.meghana.hackhubx.databinding.ActivityProfileBinding
 import com.meghana.hackhubx.model.User
 import com.meghana.hackhubx.ui.auth.LoginActivity
+import android.net.Uri
 
 class ProfileActivity : AppCompatActivity() {
 
@@ -110,6 +111,44 @@ class ProfileActivity : AppCompatActivity() {
 
                 binding.tvLinkedin.text =
                     user?.linkedin
+
+                binding.tvGithub.setOnClickListener {
+
+                    val githubUrl =
+                        user?.github
+
+                    if (!githubUrl.isNullOrEmpty()) {
+
+                        startActivity(
+
+                            Intent(
+
+                                Intent.ACTION_VIEW,
+
+                                Uri.parse(githubUrl)
+                            )
+                        )
+                    }
+                }
+
+                binding.tvLinkedin.setOnClickListener {
+
+                    val linkedinUrl =
+                        user?.linkedin
+
+                    if (!linkedinUrl.isNullOrEmpty()) {
+
+                        startActivity(
+
+                            Intent(
+
+                                Intent.ACTION_VIEW,
+
+                                Uri.parse(linkedinUrl)
+                            )
+                        )
+                    }
+                }
 
                 Glide.with(this)
 
